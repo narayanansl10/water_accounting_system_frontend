@@ -1,0 +1,14 @@
+.loginform{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin:auto;
+    margin-top: 20%;
+}
+.loginform > *{
+    margin: 2%;
+}
+
+#B1{
+    background-color: green;
+}
