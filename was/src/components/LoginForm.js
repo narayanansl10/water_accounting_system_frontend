@@ -40,6 +40,9 @@ export default class LoginForm extends Component {
                 if (decoded.data.role === "admin") {
                     this.props.history.push("/home")
                 }
+                else {
+                    this.props.history.push("/userhome")
+                }
             }
         }).catch(err => {
             console.log(err)
