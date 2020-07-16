@@ -24,10 +24,14 @@ export default class RegisterCropComponent extends Component {
             talukarray: [],
             croparray: [],
             isDistrictAvailable: false,
-            isTalukAvailable: false
+            isTalukAvailable: false,
+            plantationData: [],
+            isDataAvailable: false,
+            isReady: false
         }
     }
     componentWillMount() {
+        this.getPlantationData()
         this.getStates()
         this.getCrops()
     }
@@ -59,6 +63,9 @@ export default class RegisterCropComponent extends Component {
     handleChangeSubmit = (event) => {
         this.callSubmit()
     }
+    handleChangeAdd = (event) => {
+        this.setState({ isReady: true })
+    }
     callSubmit() {
         const decoded = jwt(localStorage.token)
         console.log(decoded)
@@ -72,10 +79,24 @@ export default class RegisterCropComponent extends Component {
             login_details: decoded.data._id
         }).then(res => {
             console.log(res);
+            this.getPlantationData()
         }).catch(err => {
             console.log(err)
         })
     }
+
+    getPlantationData() {
+        const decoded = jwt(localStorage.token)
+        const URL = _url + "/plantations/PlantationForLogin"
+        axios.post(URL, { id: decoded.data._id }).then(res => {
+            this.setState({
+                plantationData: res.data, isDataAvailable: true, stateName: "", districtName: "", talukName: "", cropName: "", village: "", area: "", date: "", isReady: false
+            })
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     getTaluk(districtId) {
         const URL = _url + "/taluks/TaluksForDistrict";
         axios.post(URL, { district_id: districtId }).then(res => {
@@ -114,83 +135,104 @@ export default class RegisterCropComponent extends Component {
     render() {
         return (
             <div>
-                <FormControl variant="outlined">
-                    <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        value={this.state.stateName}
-                        onChange={this.handleChangeState}
-                        label="State"
-                    > {
-                            this.state.statearray.map((element, index) => {
-                                return <MenuItem value={element._id}>{element.State_UT_Name}</MenuItem>
-                            })
+                {
+                    this.state.isDataAvailable ?
+                        this.state.plantationData.map((element, index) => {
+                            return (
+                                <div>
+                                    crop_id: {element.crop_id}
+                                    area_of_plantation: {element.area_of_plantation}
+                                    plantation_date: {element.plantation_date}
+                                    water_need: {element.water_need}
+                                    village_name: {element.village_name}
+                                    login_details: {element.login_details}
+                                </div>
+                            )
+                        }) : ''
+                }
+                {
+                    this.state.isReady ?
+                        <div>
+                            <FormControl variant="outlined">
+                                <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    value={this.state.stateName}
+                                    onChange={this.handleChangeState}
+                                    label="State"
+                                > {
+                                        this.state.statearray.map((element, index) => {
+                                            return <MenuItem value={element._id}>{element.State_UT_Name}</MenuItem>
+                                        })
 
-                        }
-                    </Select>
-                </FormControl>
-                <FormControl variant="outlined">
-                    <InputLabel id="demo-simple-select-outlined-label">District</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        value={this.state.districtName}
-                        onChange={this.handleChangeDistrict}
-                        label="District"
-                    > {
-                            this.state.districtarray.map((element, index) => {
-                                return <MenuItem value={element._id}>{element.district_name}</MenuItem>
-                            })
-                        }
-                    </Select>
-                </FormControl>
-                <FormControl variant="outlined">
-                    <InputLabel id="demo-simple-select-outlined-label">Taluk</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        value={this.state.talukName}
-                        onChange={this.handleChangeTaluk}
-                        label="Taluk"
-                    > {
-                            this.state.talukarray.map((element, index) => {
-                                return <MenuItem value={element._id}>{element.taluk_name}</MenuItem>
-                            })
+                                    }
+                                </Select>
+                            </FormControl>
+                            <FormControl variant="outlined">
+                                <InputLabel id="demo-simple-select-outlined-label">District</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    value={this.state.districtName}
+                                    onChange={this.handleChangeDistrict}
+                                    label="District"
+                                > {
+                                        this.state.districtarray.map((element, index) => {
+                                            return <MenuItem value={element._id}>{element.district_name}</MenuItem>
+                                        })
+                                    }
+                                </Select>
+                            </FormControl>
+                            <FormControl variant="outlined">
+                                <InputLabel id="demo-simple-select-outlined-label">Taluk</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    value={this.state.talukName}
+                                    onChange={this.handleChangeTaluk}
+                                    label="Taluk"
+                                > {
+                                        this.state.talukarray.map((element, index) => {
+                                            return <MenuItem value={element._id}>{element.taluk_name}</MenuItem>
+                                        })
 
-                        }
-                    </Select>
-                </FormControl>
-                <TextField id="outlined-basic" label="Village" variant="outlined" onChange={this.handleChangeVillage} />
-                <TextField
-                    id="outlined-number"
-                    label="Area Of Plantation"
-                    type="number"
-                    onChange={this.handleChangeArea}
-                    variant="outlined"
-                />
-                <FormControl variant="outlined">
-                    <InputLabel id="demo-simple-select-outlined-label">Cropname</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        value={this.state.cropName}
-                        onChange={this.handleChangeCrop}
-                        label="Cropname"
-                    > {
-                            this.state.croparray.map((element, index) => {
-                                return <MenuItem value={element._id}>{element.crop_name}</MenuItem>
-                            })
+                                    }
+                                </Select>
+                            </FormControl>
+                            <TextField id="outlined-basic" label="Village" variant="outlined" onChange={this.handleChangeVillage} />
+                            <TextField
+                                id="outlined-number"
+                                label="Area Of Plantation"
+                                type="number"
+                                onChange={this.handleChangeArea}
+                                variant="outlined"
+                            />
+                            <FormControl variant="outlined">
+                                <InputLabel id="demo-simple-select-outlined-label">Cropname</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    value={this.state.cropName}
+                                    onChange={this.handleChangeCrop}
+                                    label="Cropname"
+                                > {
+                                        this.state.croparray.map((element, index) => {
+                                            return <MenuItem value={element._id}>{element.crop_name}</MenuItem>
+                                        })
 
-                        }
-                    </Select>
-                </FormControl>
-                <TextField id="outlined-basic" label="Date of plantation" variant="outlined" type="date" onChange={this.handleChangeDate} />
-                <Button variant="contained" color="primary" onClick={this.handleChangeSubmit}>
-                    Submit
-                </Button>
-
-
+                                    }
+                                </Select>
+                            </FormControl>
+                            <TextField id="outlined-basic" label="Date of plantation" variant="outlined" type="date" onChange={this.handleChangeDate} />
+                            <Button variant="contained" color="primary" onClick={this.handleChangeSubmit}>
+                                Submit
+                        </Button>
+                        </div> :
+                        <Button variant="contained" color="primary" onClick={this.handleChangeAdd}>
+                            Add
+                        </Button>
+                }
             </div>
         )
     }
