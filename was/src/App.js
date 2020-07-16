@@ -13,7 +13,7 @@ class App extends React.Component {
           <Route exact path="/" component={LoginForm} />
           <Route exact path="/home" component={HomePageComponent} />
           <Route exact path="/userhome" component={RegisterCropComponent} />
-          <Route path="/logout" component={LogoutComponent} />
+          <Route exact path="/logout" component={LogoutComponent} />
         </BrowserRouter>
       </div>
     )
