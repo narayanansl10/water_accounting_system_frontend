@@ -1,0 +1,28 @@
+{
+    "type": "FeatureCollection",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn: ogc: def: crs: OGC: 1.3: CRS84"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "ID": "1",
+                "NAME": "Thenkarai Pond",
+                "ADDRESS": "Thirupparankundram",
+                "CAPACITY": "Unknown",
+                "AVAILABILITY": "Unknown"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.888411,
+                    78.070638
+                ]
+            }
+        }
+    ]
+}

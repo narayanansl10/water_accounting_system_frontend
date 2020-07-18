@@ -4,6 +4,7 @@ import HomePageComponent from './components/HomePageComponent'
 import LogoutComponent from './components/LogoutComponent'
 import RegisterCropComponent from './components/RegisterCropComponent'
 import RegisterUserComponent from './components/RegisterUserComponent'
+import MapViewComponent from './components/MapView'
 import { BrowserRouter, Route } from 'react-router-dom'
 import SimpleExample from './components/MapView'
 
@@ -18,6 +19,7 @@ class App extends React.Component {
           <Route exact path="/userhome" component={RegisterCropComponent} />
           <Route exact path="/logout" component={LogoutComponent} />
           <Route exact path="/map" component={SimpleExample} />
+          <Route exact path='/mapview' component={MapViewComponent} />
         </BrowserRouter>
       </div>
     )
