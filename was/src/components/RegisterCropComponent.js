@@ -27,7 +27,9 @@ export default class RegisterCropComponent extends Component {
             isTalukAvailable: false,
             plantationData: [],
             isDataAvailable: false,
-            isReady: false
+            isReady: false,
+            isValidVillage: true,
+            isValidArea: true
         }
     }
     componentWillMount() {
@@ -61,7 +63,17 @@ export default class RegisterCropComponent extends Component {
         this.setState({ cropName: event.target.value })
     }
     handleChangeSubmit = (event) => {
-        this.callSubmit()
+        this.setState({ isValidVillage: true, isValidArea: true })
+        if (this.checkArea() && this.checkVillage()) {
+            this.callSubmit()
+        } else {
+            if (this.checkArea()) {
+                this.setState({ isValidArea: false })
+            }
+            if (this.checkVillage()) {
+                this.setState({ isValidVillage: false })
+            }
+        }
     }
     handleChangeAdd = (event) => {
         this.setState({ isReady: true })
@@ -132,6 +144,16 @@ export default class RegisterCropComponent extends Component {
             console.log(err)
         })
     }
+
+    checkArea = () => {
+        const regex = /^[0-9]*.?[0-9]*$/
+        return regex.test(this.state.area)
+    }
+
+    checkVillage = () => {
+        return (this.state.village.length > 0)
+    }
+
     render() {
         return (
             <div>

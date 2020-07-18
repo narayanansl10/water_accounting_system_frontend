@@ -9,7 +9,6 @@ export default class HomePageComponent extends Component {
                     localStorage.removeItem('token')
                     this.props.history.push("/")
                 }}>Logout</button>
-
             </div>
         )
     }
