@@ -18,6 +18,7 @@ class App extends React.Component {
           <Route exact path="/userhome" component={RegisterCropComponent} />
           <Route exact path="/logout" component={LogoutComponent} />
           <Route exact path='/mapview' component={MapViewComponent} />
+          <Route exact path='/graphrainfall' component={GraphRainfallComponent} />
         </BrowserRouter>
       </div>
     )

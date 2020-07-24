@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import HeaderImage from '../assets/header-image.jpg'
 import { TextField, Button } from '@material-ui/core'
+import './styles/register.css'
 import _url from './../URL'
 const axios = require('axios')
 
@@ -112,39 +114,52 @@ export default class RegisterUserComponent extends Component {
     render() {
         return (
             <div>
-                <TextField error={!this.state.isValidName} name="username" id="outlined-basic" label="Name" variant="outlined" value={this.state.username} onChange={this.handleOnChange} helperText={!this.state.isValidName ? "Name cannot be empty" : ''} />
-                <TextField error={!this.state.isValidAadhar} name="aadharnumber" id="outlined-basic" label="Aadhar Number" variant="outlined" value={this.state.aadharNumber} onChange={this.handleOnChange} helperText={!this.state.isValidAadhar ? "Invalid Aadhar format" : ''} />
-                <TextField error={!this.state.isValidPhoneNumber} name="phonenumber" id="outlined-basic" label="Phone Number" variant="outlined" value={this.state.phoneNumber} onChange={this.handleOnChange} helperText={!this.state.isValidPhoneNumber ? "Invalid Phone Number" : ''} />
-                <TextField
-                    error={!this.state.isValidPassword}
-                    id="outlined-password-input"
-                    label="Password"
-                    type="password"
-                    name="password"
-                    autoComplete="current-password"
-                    variant="outlined"
-                    helperText={!this.state.isValidPassword ? "Password must contain atleast 8 characters" : ''}
-                    value={this.state.password}
-                    onChange={this.handleOnChange}
-                />
-                <TextField
-                    error={!this.state.isPasswordMatch}
-                    id="outlined-password-input"
-                    label="Confirm Password"
-                    type="password"
-                    name="cpassword"
-                    autoComplete="current-password"
-                    variant="outlined"
-                    helperText={!this.state.isPasswordMatch ? "Confirm Password is not matched" : ''}
-                    value={this.state.confirmPassword}
-                    onChange={this.handleOnChange}
-                />
-                <Button id="B1" variant="contained" color="Primary" onClick={this.validateRegistration}>
-                    Register
+                <div >
+                    <img id='headerimage'
+                        src={HeaderImage}
+                    />
+                </div>
+                <div className="body-container-register">
+
+                    <div className="usernameField"><TextField error={!this.state.isValidName} name="username" id="outlined-basic" label="Name" variant="outlined" value={this.state.username} onChange={this.handleOnChange} helperText={!this.state.isValidName ? "Name cannot be empty" : ''} /></div>
+                    <div className="aadharField"><TextField error={!this.state.isValidAadhar} name="aadharnumber" id="outlined-basic" label="Aadhar Number" variant="outlined" value={this.state.aadharNumber} onChange={this.handleOnChange} helperText={!this.state.isValidAadhar ? "Invalid Aadhar format" : ''} /></div>
+                    <div className="phoneField"><TextField error={!this.state.isValidPhoneNumber} name="phonenumber" id="outlined-basic" label="Phone Number" variant="outlined" value={this.state.phoneNumber} onChange={this.handleOnChange} helperText={!this.state.isValidPhoneNumber ? "Invalid Phone Number" : ''} /></div>
+                    <div className="passwordField"><TextField
+                        error={!this.state.isValidPassword}
+                        id="outlined-password-input"
+                        label="Password"
+                        type="password"
+                        name="password"
+                        autoComplete="current-password"
+                        variant="outlined"
+                        helperText={!this.state.isValidPassword ? "Password must contain atleast 8 characters" : ''}
+                        value={this.state.password}
+                        onChange={this.handleOnChange}
+                    /></div>
+                    <div className="confirmField"><TextField
+                        error={!this.state.isPasswordMatch}
+                        id="outlined-password-input"
+                        label="Confirm Password"
+                        type="password"
+                        name="cpassword"
+                        autoComplete="current-password"
+                        variant="outlined"
+                        helperText={!this.state.isPasswordMatch ? "Confirm Password is not matched" : ''}
+                        value={this.state.confirmPassword}
+                        onChange={this.handleOnChange}
+                    /></div>
+                    <div>
+                        <TextField variant="outlined" label="OTP" />
+                    </div>
+                    <div>
+                        <Button id="B1" variant="contained" color="Primary" onClick={this.validateRegistration}>
+                            Register
                 </Button>
-                <Button id="B1" variant="contained" color="Primary" onClick={this.resetForm}>
-                    Reset
+                        <Button id="B1" variant="contained" color="Primary" onClick={this.resetForm}>
+                            Reset
                 </Button>
+                    </div>
+                </div>
             </div>
         )
     }

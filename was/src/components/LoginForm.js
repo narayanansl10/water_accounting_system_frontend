@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { TextField, Button } from '@material-ui/core'
+import Image from 'material-ui-image'
 import './styles/loginform.css'
+import HeaderImage from '../assets/header-image.jpg'
+import ImgMediaCard from './CardComponent'
 const axios = require('axios')
 const jwt = require('jwt-decode')
+
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -13,6 +17,7 @@ export default class LoginForm extends Component {
         }
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
         this.handleUsernameChange = this.handleUsernameChange.bind(this)
+        this.callRegister = this.callRegister.bind(this)
         this.callLoginApi = this.callLoginApi.bind(this)
     }
     handleUsernameChange(event) {
@@ -22,6 +27,9 @@ export default class LoginForm extends Component {
     handlePasswordChange(event) {
         console.log(event.target.value)
         this.setState({ password: event.target.value })
+    }
+    callRegister(event) {
+        this.props.history.push('/register')
     }
     callLoginApi(event) {
         // console.log(this.state.username + " " + this.state.password)
@@ -52,19 +60,43 @@ export default class LoginForm extends Component {
     }
     render() {
         return (
-            <div className="loginform">
-                <TextField id="outlined-basic" label="Phone Number" variant="outlined" onChange={this.handleUsernameChange} />
-                <TextField
-                    id="outlined-password-input"
-                    label="Password"
-                    type="password"
-                    autoComplete="current-password"
-                    variant="outlined"
-                    onChange={this.handlePasswordChange}
-                />
-                <Button id="B1" variant="contained" color="Primary" onClick={this.callLoginApi}>
-                    LOGIN
-                </Button>
+            <div>
+                <div >
+                    <img id='headerimage'
+                        src={HeaderImage}
+                    />
+                </div>
+                <div className="body-container">
+                    <div className="announcement-container"><h2>Announcements</h2><p>Announcement 1</p><p>Announcement2</p><p>Announcement 3</p><p>Announcement 4</p></div>
+                    <div className="text-container"><p>DON'T LET LIFE SLIP DOWN THE RAIN!</p><ImgMediaCard /></div>
+                    <div className="loginform">
+                        <div>
+                            <h2>Login Here</h2>
+                        </div>
+                        <div>
+                            <TextField id="outlined-basic" label="Phone Number" variant="outlined" onChange={this.handleUsernameChange} />
+                        </div>
+                        <div>
+                            <TextField
+                                id="outlined-password-input"
+                                label="Password"
+                                type="password"
+                                autoComplete="current-password"
+                                variant="outlined"
+                                onChange={this.handlePasswordChange} />
+                        </div>
+                        <div>
+                            <Button id="B1" variant="contained" color="Primary" onClick={this.callLoginApi}>
+                                LOGIN
+                            </Button>&nbsp;
+                            <Button id="B1" variant="contained" color="Primary" onClick={this.callRegister}>
+                                Register
+                            </Button>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
         )
