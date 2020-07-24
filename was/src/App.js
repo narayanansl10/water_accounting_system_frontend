@@ -5,6 +5,7 @@ import LogoutComponent from './components/LogoutComponent'
 import RegisterCropComponent from './components/RegisterCropComponent'
 import RegisterUserComponent from './components/RegisterUserComponent'
 import MapViewComponent from './components/MapView'
+import GraphRainfallComponent from './components/GraphRainfallComponent'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 class App extends React.Component {
