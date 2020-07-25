@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { TextField, Button } from '@material-ui/core'
-import Image from 'material-ui-image'
 import './styles/loginform.css'
 import HeaderImage from '../assets/header-image.jpg'
 import ImgMediaCard from './CardComponent'

@@ -6,6 +6,7 @@ import RegisterCropComponent from './components/RegisterCropComponent'
 import RegisterUserComponent from './components/RegisterUserComponent'
 import MapViewComponent from './components/MapView'
 import GraphRainfallComponent from './components/GraphRainfallComponent'
+import WaterAvailabilityComponent from './components/WaterAvailablilityComponent'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 class App extends React.Component {
@@ -20,6 +21,7 @@ class App extends React.Component {
           <Route exact path="/logout" component={LogoutComponent} />
           <Route exact path='/mapview' component={MapViewComponent} />
           <Route exact path='/graphrainfall' component={GraphRainfallComponent} />
+          <Route exact path='/wateravailable' component={WaterAvailabilityComponent} />
         </BrowserRouter>
       </div>
     )
