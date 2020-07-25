@@ -1,0 +1,19 @@
+#welcometext{
+    text-align: center;
+    
+}
+#alignitemscenter{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    
+}
+
+#alignitemscenter > *{
+    margin-top: 5%;
+}
+
+#alignaddbutton > *{
+    margin-left: 5px;
+}
