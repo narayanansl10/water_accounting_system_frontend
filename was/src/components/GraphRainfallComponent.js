@@ -13,13 +13,21 @@ export default class GraphRainfallComponent extends Component {
             dataArray: []
         }
     }
-    componentWillMount() {
-        this.getGraphData(this.props.taluk_id)
+    componentDidMount() {
+        this.getGraphData()
     }
-    getGraphData(taluk_id) {
-        const URL = _url + "/plantations/generategraph";
+    getGraphData() {
+        var URL
+        if (this.props.mode === 1) {
+            URL = _url + "/plantations/generateGraph";
+        } else if (this.props.mode === 2) {
+            URL = _url + "/plantations/generateGraphByDistrict"
+        } else {
+            URL = _url + "/plantations/generateWaterNeedByDistrict"
+        }
+        console.log(this.props.AreaId, this.props.mode)
         axios.post(URL, {
-            taluk_id: "5f0f24351af2f8280b2b123f"
+            id: this.props.AreaId
         }).then(res => {
             this.setState({ dataArray: res.data })
             console.log(res)

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SideDrawer from './DrawerComponent'
+import GraphRainfallComponent from './GraphRainfallComponent'
 
 export default class HomePageComponent extends Component {
     render() {
@@ -7,7 +8,7 @@ export default class HomePageComponent extends Component {
             <div>
                 <SideDrawer history={this.props.history}>
                 </SideDrawer>
-                ADMIN Home Page works!
+                <GraphRainfallComponent mode={1} AreaId={'5f0f24351af2f8280b2b123f'} />
             </div>
         )
     }
