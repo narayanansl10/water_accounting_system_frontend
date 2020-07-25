@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { Icon } from "leaflet";
-import * as waterData from "./../data/waterbodyLocation.json";
 import "./styles/MapCSS.css";
 import _url from './../URL'
 const axios = require('axios')
