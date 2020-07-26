@@ -3,16 +3,16 @@ import GaugeChart from 'react-gauge-chart'
 import _url from './../URL'
 const axios = require('axios')
 
-export default class WaterAvailablilityComponent extends Component {
+export default class WaterAvailabilityComponent extends Component {
     state = {
         percentageFull: 0.0
     }
     componentDidMount() {
         URL = _url + '/waterinfo/waterBodyInfo'
         axios.post(URL, {
-            waterbody_id: '5f152bf40088083fdd92a249'
+            waterbody_id: this.props.waterbodyId
         }).then(res => {
-            this.setState({ percentageFull: res.data.percentage })
+            this.setState({ percentageFull: parseFloat(res.data.percentage) })
         }).catch(err => {
             console.log(err)
         })

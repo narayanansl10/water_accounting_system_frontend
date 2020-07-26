@@ -6,7 +6,7 @@ import RegisterCropComponent from './components/RegisterCropComponent'
 import RegisterUserComponent from './components/RegisterUserComponent'
 import MapViewComponent from './components/MapView'
 import GraphRainfallComponent from './components/GraphRainfallComponent'
-import WaterAvailabilityComponent from './components/WaterAvailablilityComponent'
+import WaterAvailabilityComponent from './components/WaterAvailabilityComponent'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 class App extends React.Component {

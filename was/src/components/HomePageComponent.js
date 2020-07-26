@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { Button, Container, TextField } from '@material-ui/core'
 import SideDrawer from './DrawerComponent'
-import GraphRainfallComponent from './GraphRainfallComponent'
 import './styles/adminhome.css'
+import GraphForTaluk from './GraphForTaluk'
+import GraphForDistrict from './GraphForDistrict'
+import WaterBodyForTaluk from './WaterBodyForTaluk'
+
 export default class HomePageComponent extends Component {
     constructor(props) {
         super(props)
@@ -40,7 +43,14 @@ export default class HomePageComponent extends Component {
                     </Container>
 
                 </div>
-                {/* <GraphRainfallComponent mode={1} AreaId={'5f0f24351af2f8280b2b123f'} /> */}
+                {/* <div><GraphForTaluk /></div> */}
+                {/* <div>
+                    <GraphForDistrict />
+                </div> */}
+                <div>
+                    <WaterBodyForTaluk />
+                </div>
+
             </div>
         )
     }

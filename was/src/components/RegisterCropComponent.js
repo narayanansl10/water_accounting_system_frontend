@@ -21,6 +21,7 @@ export default class RegisterCropComponent extends Component {
             village: "",
             area: "",
             date: "",
+            surveynumber: "",
             statearray: [],
             districtarray: [],
             talukarray: [],
@@ -31,7 +32,8 @@ export default class RegisterCropComponent extends Component {
             isDataAvailable: false,
             isReady: false,
             isValidVillage: true,
-            isValidArea: true
+            isValidArea: true,
+            isValidSurvey: true
         }
     }
     componentWillMount() {
@@ -55,6 +57,9 @@ export default class RegisterCropComponent extends Component {
     handleChangeVillage = (event) => {
         this.setState({ village: event.target.value })
     }
+    handleChangeSurvey = (event) => {
+        this.setState({ surveynumber: event.target.value })
+    }
     handleChangeDate = (event) => {
         this.setState({ date: event.target.value })
     }
@@ -66,7 +71,7 @@ export default class RegisterCropComponent extends Component {
     }
     handleChangeSubmit = (event) => {
         this.setState({ isValidVillage: true, isValidArea: true })
-        if (this.checkArea() && this.checkVillage()) {
+        if (this.checkArea() && this.checkVillage() && this.checkSurvey()) {
             this.callSubmit()
         } else {
             if (this.checkArea()) {
@@ -90,6 +95,7 @@ export default class RegisterCropComponent extends Component {
             plantation_date: this.state.date,
             taluk_id: this.state.talukName,
             village_name: this.state.village,
+            survey_number: this.state.surveynumber,
             login_details: decoded.data._id
         }).then(res => {
             console.log(res);
@@ -153,6 +159,10 @@ export default class RegisterCropComponent extends Component {
     }
 
     checkVillage = () => {
+        return (this.state.village.length > 0)
+    }
+
+    checkSurvey = () => {
         return (this.state.village.length > 0)
     }
 
@@ -234,9 +244,10 @@ export default class RegisterCropComponent extends Component {
                                     </Select>
                                 </FormControl>
                                 <TextField id="outlined-basic" label="Village" variant="outlined" onChange={this.handleChangeVillage} />
+                                <TextField id="outlined-basic" label="Survey Number" variant="outlined" onChange={this.handleChangeSurvey} />
                                 <TextField
                                     id="outlined-number"
-                                    label="Area Of Plantation"
+                                    label="Area Of Plantation in Hecatares"
                                     type="number"
                                     onChange={this.handleChangeArea}
                                     variant="outlined"
@@ -260,7 +271,7 @@ export default class RegisterCropComponent extends Component {
                                 <TextField id="outlined-basic" label="Date of plantation" variant="outlined" type="date" onChange={this.handleChangeDate} />
                                 <Button id="B1" variant="contained" color="primary" onClick={this.handleChangeSubmit}>
                                     Submit
-                        </Button>
+                                </Button>
                             </div> :
                             <Button id="B1" variant="contained" color="primary" onClick={this.handleChangeAdd}>
                                 Add Crop

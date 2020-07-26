@@ -36,7 +36,7 @@ export default class SideDrawer extends Component {
             onKeyDown={this.toggleDrawer(anchor, false)}
         >
             <List>
-                {['Graphs', 'Maps', 'Data Edit', 'Greivances'].map((text, index) => (
+                {['Graphs', 'Maps', 'Data Edit', 'Districtwise Data', 'WaterBody Data'].map((text, index) => (
                     <ListItem button key={text}>
                         <ListItemIcon>{index % 2 === 0 ? "ICON" : "ICON"}</ListItemIcon>
                         <ListItemText primary={text} />
