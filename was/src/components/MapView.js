@@ -11,7 +11,9 @@ export default class MapView extends Component {
         this.state = {
             activeWB: null,
             setActiveWB: null,
-            waterDataArray: []
+            waterDataArray: [],
+            centerlat: '',
+            centerlong: ''
         }
     }
     componentWillMount() {
@@ -21,17 +23,18 @@ export default class MapView extends Component {
         this.setState({ activeWB: wb })
     }
     getWaterBodies() {
-        const URL = _url + "/waterinfo";
-        axios.get(URL).then(res => {
+        const URL = _url + "/waterinfo/waterbodyForTaluk";
+        axios.post(URL, { taluk_id: this.props.talukId }).then(res => {
             this.setState({ waterDataArray: res.data })
-            console.log(res.data)
+            this.setState({ centerlat: res.data[0].latitude })
+            this.setState({ centerlong: res.data[0].longitude })
         }).catch(err => {
             console.log(err)
         })
     }
     render() {
         return (
-            <Map center={[9.925201, 78.119774]} zoom={12} >
+            <Map center={[this.state.centerlat, this.state.centerlong]} zoom={10} >
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

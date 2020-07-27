@@ -3,6 +3,7 @@ import { Button, Container, TextField } from '@material-ui/core'
 import SideDrawer from './DrawerComponent'
 import './styles/adminhome.css'
 import GraphForTaluk from './GraphForTaluk'
+import MapForTaluk from './MapForTaluk'
 import GraphForDistrict from './GraphForDistrict'
 import WaterBodyForTaluk from './WaterBodyForTaluk'
 
@@ -47,8 +48,11 @@ export default class HomePageComponent extends Component {
                 {/* <div>
                     <GraphForDistrict />
                 </div> */}
-                <div>
+                {/* <div>
                     <WaterBodyForTaluk />
+                </div> */}
+                <div>
+                    <MapForTaluk />
                 </div>
 
             </div>
