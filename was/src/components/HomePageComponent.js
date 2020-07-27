@@ -7,16 +7,34 @@ import MapForTaluk from './MapForTaluk'
 import GraphForDistrict from './GraphForDistrict'
 import WaterBodyForTaluk from './WaterBodyForTaluk'
 import ExcelForTaluk from './ExcelForTaluk'
+import _url from './../URL'
+const axios = require('axios')
 
 export default class HomePageComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isAnnouncementReady: false
+            isAnnouncementReady: false,
+            announcementText: false
         }
+    }
+    handleGreivances = (event) => {
+        this.props.history.push('/home/grievance')
+    }
+    addAnnouncements = (event) => {
+        const URL = _url + "/announcements/create";
+        axios.post(URL, { name: this.state.announcementText }).then(res => {
+            this.setState({ isAnnouncementReady: false })
+            window.alert("Announcement Added")
+        }).catch(err => {
+            console.log(err)
+        })
     }
     toggleAnnouncements = (event) => {
         this.state.isAnnouncementReady ? this.setState({ isAnnouncementReady: false }) : this.setState({ isAnnouncementReady: true })
+    }
+    handleChangeAdd = (event) => {
+        this.setState({ announcementText: event.target.value })
     }
     render() {
         return (
@@ -27,7 +45,7 @@ export default class HomePageComponent extends Component {
                 <div>
                     <h2 id="welcometext">Quick Access</h2>
                     <Container fixed id="alignitemscenter">
-                        <Button variant="contained" color="Primary" >
+                        <Button variant="contained" color="Primary" onClick={this.handleGreivances}>
                             Grievances</Button>
                         <Button variant="contained" color="Primary" onClick={this.toggleAnnouncements}>
                             Add Announcements</Button>
@@ -41,23 +59,10 @@ export default class HomePageComponent extends Component {
                         <Button variant="contained" color="Primary" >
                             Generate Reports</Button>
                         <Button variant="contained" color="Primary" >
-                            View Contacts</Button>
+                            Update Water Body Availability</Button>
                     </Container>
 
                 </div>
-                {/* <div><GraphForTaluk /></div> */}
-                {/* <div>
-                    <GraphForDistrict />
-                </div> */}
-                {/* <div>
-                    <WaterBodyForTaluk />
-                </div> */}
-                {/* <div>
-                    <MapForTaluk />
-                </div> */}
-                {/* <div>
-                    <ExcelForTaluk />
-                </div> */}
             </div>
         )
     }

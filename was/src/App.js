@@ -2,6 +2,7 @@ import React from 'react';
 import LoginForm from './components/LoginForm'
 import HomePageComponent from './components/HomePageComponent'
 import LogoutComponent from './components/LogoutComponent'
+import GrievanceComponent from './components/GrievanceComponent'
 import RegisterCropComponent from './components/RegisterCropComponent'
 import RegisterUserComponent from './components/RegisterUserComponent'
 import GraphForTaluk from './components/GraphForTaluk'
@@ -24,6 +25,7 @@ class App extends React.Component {
           <Route exact path='/excelfortaluk' component={ExcelForTaluk} />
           <Route exact path='/mapfortaluk' component={MapForTaluk} />
           <Route exact path='/waterbodyfortaluk' component={WaterBodyForTaluk} />
+          <Route exact path='/home/grievance' component={GrievanceComponent} />
         </BrowserRouter>
       </div>
     )

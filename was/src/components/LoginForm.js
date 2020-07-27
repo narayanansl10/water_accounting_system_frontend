@@ -3,6 +3,7 @@ import { TextField, Button } from '@material-ui/core'
 import './styles/loginform.css'
 import HeaderImage from '../assets/header-image.jpg'
 import ImgMediaCard from './CardComponent'
+import _url from './../URL'
 const axios = require('axios')
 const jwt = require('jwt-decode')
 
@@ -12,7 +13,9 @@ export default class LoginForm extends Component {
         super(props)
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            announcementData: [],
+            isDataAvailable: false,
         }
         this.handlePasswordChange = this.handlePasswordChange.bind(this)
         this.handleUsernameChange = this.handleUsernameChange.bind(this)
@@ -57,16 +60,45 @@ export default class LoginForm extends Component {
         })
 
     }
+    componentDidMount() {
+        this.getAnnouncements()
+    }
+    getAnnouncements() {
+        const URL = _url + "/announcements/";
+        axios.get(URL).then(res => {
+            this.setState({ announcementData: res.data })
+            this.setState({ isDataAvailable: true })
+        }).catch(err => {
+            console.log(err)
+        })
+    }
     render() {
         return (
             <div>
-                <div >
-                    <img id='headerimage'
-                        src={HeaderImage}
-                    />
+                <div id="headerimage">
+                    <div id="imagecontainer">
+                        <img
+                            src={HeaderImage}
+                        />
+                    </div>
                 </div>
                 <div className="body-container">
-                    <div className="announcement-container"><h2>Announcements</h2><p>Announcement 1</p><p>Announcement2</p><p>Announcement 3</p><p>Announcement 4</p></div>
+                    <div className="announcement-container">
+                        <h2>Announcements</h2>
+                        {
+                            this.state.isDataAvailable ?
+                                this.state.announcementData.map((element, index) => {
+                                    return (
+                                        <div>
+                                            <div id="announcement">
+                                                {element.name}
+                                            </div>
+                                            <br />
+                                        </div>
+                                    )
+                                }) : ''
+                        }
+                    </div>
                     <div className="text-container"><p>DON'T LET LIFE SLIP DOWN THE RAIN!</p><ImgMediaCard /></div>
                     <div className="loginform">
                         <div>

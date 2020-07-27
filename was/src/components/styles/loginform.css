@@ -37,11 +37,15 @@
 }
 
 #headerimage{
-    height: auto;
-    max-width: 100%;
     display: flex;
+    flex-flow:row nowrap;
+    align-items: center;
 } 
-
+img {max-width:100%;}
+#announcement{
+    font-size: smaller;
+    font-weight: bold;
+}
 #B1{
     background-color: green;
 }
