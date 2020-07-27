@@ -4,9 +4,10 @@ import HomePageComponent from './components/HomePageComponent'
 import LogoutComponent from './components/LogoutComponent'
 import RegisterCropComponent from './components/RegisterCropComponent'
 import RegisterUserComponent from './components/RegisterUserComponent'
-import MapViewComponent from './components/MapView'
-import GraphRainfallComponent from './components/GraphRainfallComponent'
-import WaterAvailabilityComponent from './components/WaterAvailabilityComponent'
+import GraphForTaluk from './components/GraphForTaluk'
+import WaterBodyForTaluk from './components/WaterBodyForTaluk'
+import ExcelForTaluk from './components/ExcelForTaluk'
+import MapForTaluk from './components/MapForTaluk'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 class App extends React.Component {
@@ -19,9 +20,10 @@ class App extends React.Component {
           <Route exact path="/home" component={HomePageComponent} />
           <Route exact path="/userhome" component={RegisterCropComponent} />
           <Route exact path="/logout" component={LogoutComponent} />
-          <Route exact path='/mapview' component={MapViewComponent} />
-          <Route exact path='/graphrainfall' component={GraphRainfallComponent} />
-          <Route exact path='/wateravailable' component={WaterAvailabilityComponent} />
+          <Route exact path='/graphfortaluk' component={GraphForTaluk} />
+          <Route exact path='/excelfortaluk' component={ExcelForTaluk} />
+          <Route exact path='/mapfortaluk' component={MapForTaluk} />
+          <Route exact path='/waterbodyfortaluk' component={WaterBodyForTaluk} />
         </BrowserRouter>
       </div>
     )

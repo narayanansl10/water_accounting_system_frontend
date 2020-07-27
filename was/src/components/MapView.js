@@ -34,38 +34,40 @@ export default class MapView extends Component {
     }
     render() {
         return (
-            <Map center={[this.state.centerlat, this.state.centerlong]} zoom={10} >
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                />
-                {this.state.waterDataArray.map(wb => (
-                    < Marker key={wb.unique_id} position={[wb.latitude, wb.longitude]}
-                        onClick={() => {
-                            this.setActiveWB(wb);
-                        }}
+            <div>
+                <Map center={[this.state.centerlat, this.state.centerlong]} zoom={10} >
+                    <TileLayer
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
-                ))}
-                {
-                    this.state.activeWB && (
-                        <Popup
-                            position={[
-                                this.state.activeWB.latitude,
-                                this.state.activeWB.longitude
-                            ]}
-                            onClose={() => {
-                                this.setActiveWB(null);
+                    {this.state.waterDataArray.map(wb => (
+                        < Marker key={wb.unique_id} position={[wb.latitude, wb.longitude]}
+                            onClick={() => {
+                                this.setActiveWB(wb);
                             }}
-                        >
-                            <div>
-                                <h2>{this.state.activeWB.tank_name}</h2>
-                                <p>{this.state.activeWB.village}</p>
-                                <p>{this.state.activeWB.max_capacity}:{this.state.activeWB.available_capacitys}</p>
-                            </div>
-                        </Popup>
-                    )
-                }
-            </Map >
+                        />
+                    ))}
+                    {
+                        this.state.activeWB && (
+                            <Popup
+                                position={[
+                                    this.state.activeWB.latitude,
+                                    this.state.activeWB.longitude
+                                ]}
+                                onClose={() => {
+                                    this.setActiveWB(null);
+                                }}
+                            >
+                                <div>
+                                    <h2>{this.state.activeWB.tank_name}</h2>
+                                    <p>{this.state.activeWB.village}</p>
+                                    <p>{this.state.activeWB.max_capacity}:{this.state.activeWB.available_capacitys}</p>
+                                </div>
+                            </Popup>
+                        )
+                    }
+                </Map >
+            </div>
         )
     }
 

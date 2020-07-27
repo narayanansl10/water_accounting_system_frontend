@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import GraphRainfallComponent from './GraphRainfallComponent'
 import Select from '@material-ui/core/Select';
 import './styles/registercropcomponent.css'
-import './styles/talukcomponents.css'
+import FileSaver from 'file-saver';
+import _url from '../URL'
 import SideDrawer from './DrawerComponent'
-import _url from './../URL'
 import { Button } from '@material-ui/core';
 const axios = require('axios')
 const jwt = require('jwt-decode')
+
 
 export default class GraphForTaluk extends Component {
     constructor(props) {
@@ -27,7 +27,7 @@ export default class GraphForTaluk extends Component {
             isDataAvailable: false,
             isReady: false,
         }
-        this.handleChangeShow = this.handleChangeShow.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     componentWillMount() {
         this.getStates()
@@ -76,25 +76,31 @@ export default class GraphForTaluk extends Component {
             console.log(err)
         })
     }
-    handleChangeShow() {
-        if (this.state.isReady) {
-            this.setState({ isReady: false })
-        }
-        else { this.setState({ isReady: true }) }
+    handleSubmit() {
+        const URL = _url + "/plantations/generateExcel/" + this.state.talukName
+        fetch({
+            method: 'GET',
+        }).then(res => {
+            const file = res.blob()
+            return file
+        }).then(blob => {
+            const href = window.URL.createObjectURL(blob);
+            const a = document.createElement('a')
+            a.download = 'filename.xlsx';
+            a.href = href;
+            a.click();
+            a.href = '';
+        }).catch(err => console.error(err));
     }
 
     render() {
         return (
             <div>
-
                 <SideDrawer history={this.props.history}>
                 </SideDrawer>
                 <div>
-                    <h1 id="headertextforcomponent">Graph For Talukwise Water Need For Various Crops</h1>
-                </div>
-                <div id="selectionuptotaluk">
                     {
-                        <div id="selection1" >
+                        <div>
                             <FormControl variant="outlined">
                                 <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
                                 <Select
@@ -143,15 +149,13 @@ export default class GraphForTaluk extends Component {
                                 </Select>
                             </FormControl>
                             {console.log(this.state.talukName)}
-                            <Button variant="contained" color="primary" onClick={this.handleChangeShow}>
-                                Show Graph
+                            <Button variant="contained" color="primary" onClick={this.handleSubmit}>
+                                Generate Excel
                         </Button>
-
                         </div>
                     }
                 </div>
-                <div id="rendercomponent">{this.state.isReady ? <GraphRainfallComponent mode={1} AreaId={this.state.talukName} /> : ''}</div>
-            </div >
+            </div>
 
         )
     }

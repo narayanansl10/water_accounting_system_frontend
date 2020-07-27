@@ -4,9 +4,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import WaterAvailabilityComponent from './WaterAvailabilityComponent'
 import Select from '@material-ui/core/Select';
+import SideDrawer from './DrawerComponent'
 import './styles/registercropcomponent.css'
 import _url from './../URL'
 import { Button } from '@material-ui/core';
+import './styles/talukcomponents.css'
 const axios = require('axios')
 const jwt = require('jwt-decode')
 
@@ -102,9 +104,14 @@ export default class WaterBodyForTaluk extends Component {
     render() {
         return (
             <div>
+                <SideDrawer history={this.props.history}>
+                </SideDrawer>
                 <div>
+                    <h1 id="headertextforcomponent">Graph For Talukwise Water Availability in Various Water Bodies</h1>
+                </div>
+                <div id="selectionuptotaluk">
                     {
-                        <div>
+                        <div id="selection1">
                             <FormControl variant="outlined">
                                 <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
                                 <Select
@@ -171,10 +178,11 @@ export default class WaterBodyForTaluk extends Component {
                             <Button variant="contained" color="primary" onClick={this.handleChangeShow}>
                                 Show Graph
                         </Button>
-                            {this.state.isReady ? < WaterAvailabilityComponent waterbodyId={this.state.waterbodyName} /> : ''}
+
                         </div>
                     }
                 </div>
+                <div id="rendercomponentwater">{this.state.isReady ? < WaterAvailabilityComponent waterbodyId={this.state.waterbodyName} /> : ''}</div>
             </div>
 
         )

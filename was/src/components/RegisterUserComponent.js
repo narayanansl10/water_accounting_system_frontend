@@ -67,6 +67,8 @@ export default class RegisterUserComponent extends Component {
             role: 'user'
         }).then(res => {
             console.log(res)
+            window.alert("Register Successful")
+            this.props.history.push("/")
         }).catch(err => {
             console.log(err)
         })

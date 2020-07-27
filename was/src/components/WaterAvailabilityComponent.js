@@ -5,7 +5,9 @@ const axios = require('axios')
 
 export default class WaterAvailabilityComponent extends Component {
     state = {
-        percentageFull: 0.0
+        percentageFull: 0.0,
+        max_capacity: 0.0,
+        available_capacity: 0.0
     }
     componentDidMount() {
         URL = _url + '/waterinfo/waterBodyInfo'
@@ -13,6 +15,8 @@ export default class WaterAvailabilityComponent extends Component {
             waterbody_id: this.props.waterbodyId
         }).then(res => {
             this.setState({ percentageFull: parseFloat(res.data.percentage) })
+            this.setState({ max_capacity: parseFloat(res.data.max_capacity) })
+            this.setState({ available_capacity: parseFloat(res.data.available_capacity) })
         }).catch(err => {
             console.log(err)
         })
@@ -31,7 +35,8 @@ export default class WaterAvailabilityComponent extends Component {
                     colors={['#ADD8E6', '#0000A0']}
                 />
                 <div>
-                    Meter label
+                    <h3 id="headertextforcomponent">{"Maximum Capacity(mcm):" + this.state.max_capacity}</h3>
+                    <h3 id="headertextforcomponent">{"Available Capacity(mcm):" + this.state.available_capacity}</h3>
                 </div>
             </div>
         )

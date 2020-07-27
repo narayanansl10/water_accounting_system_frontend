@@ -6,6 +6,7 @@ import GraphForTaluk from './GraphForTaluk'
 import MapForTaluk from './MapForTaluk'
 import GraphForDistrict from './GraphForDistrict'
 import WaterBodyForTaluk from './WaterBodyForTaluk'
+import ExcelForTaluk from './ExcelForTaluk'
 
 export default class HomePageComponent extends Component {
     constructor(props) {
@@ -51,10 +52,12 @@ export default class HomePageComponent extends Component {
                 {/* <div>
                     <WaterBodyForTaluk />
                 </div> */}
-                <div>
+                {/* <div>
                     <MapForTaluk />
-                </div>
-
+                </div> */}
+                {/* <div>
+                    <ExcelForTaluk />
+                </div> */}
             </div>
         )
     }

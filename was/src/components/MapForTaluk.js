@@ -5,8 +5,10 @@ import FormControl from '@material-ui/core/FormControl';
 import MapView from './MapView'
 import Select from '@material-ui/core/Select';
 import './styles/registercropcomponent.css'
+import './styles/talukcomponents.css'
 import _url from './../URL'
 import { Button } from '@material-ui/core';
+import SideDrawer from './DrawerComponent'
 const axios = require('axios')
 const jwt = require('jwt-decode')
 
@@ -84,9 +86,14 @@ export default class MapForTaluk extends Component {
     render() {
         return (
             <div>
+                <SideDrawer history={this.props.history}>
+                </SideDrawer>
                 <div>
+                    <h1 id="headertextforcomponent">Map For Talukwise Water Bodies</h1>
+                </div>
+                <div id="selectionuptotaluk">
                     {
-                        <div>
+                        <div id="selection1">
                             <FormControl variant="outlined">
                                 <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
                                 <Select
@@ -138,9 +145,12 @@ export default class MapForTaluk extends Component {
                             <Button variant="contained" color="primary" onClick={this.handleChangeShow}>
                                 Show Map
                         </Button>
-                            {this.state.isReady ? <MapView talukId={this.state.talukName} /> : ''}
+
                         </div>
                     }
+                </div>
+                <div id="rendercomponent">
+                    {this.state.isReady ? <MapView talukId={this.state.talukName} /> : ''}
                 </div>
             </div>
 
