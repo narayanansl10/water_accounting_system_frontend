@@ -3,59 +3,79 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import './styles/registercropcomponent.css'
-import './styles/talukcomponents.css'
-import _url from '../URL'
 import SideDrawer from './DrawerComponent'
-import { Button } from '@material-ui/core';
+import './styles/registercropcomponent.css'
+import _url from '../URL'
+import { TextField, Button } from '@material-ui/core';
+import './styles/talukcomponents.css'
 const axios = require('axios')
 const jwt = require('jwt-decode')
 
-
-export default class GraphForTaluk extends Component {
+export default class WaterBodyForTalukUpdate extends Component {
     constructor(props) {
         super(props)
         this.state = {
             stateName: "",
             districtName: "",
             talukName: "",
-            taluk_name: "",
+            waterbodyName: "",
+            newCapacity: "",
             statearray: [],
             districtarray: [],
             talukarray: [],
+            waterbodyarray: [],
             isDistrictAvailable: false,
             isTalukAvailable: false,
             isDataAvailable: false,
-            isReady: false,
-            exceldata: [],
+            isWaterBodyAvailable: false,
+            isReady: false
         }
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChangeShow = this.handleChangeShow.bind(this)
+        this.updateAvailable = this.updateAvailable.bind(this)
     }
     componentWillMount() {
         this.getStates()
     }
     handleChangeState = (event) => {
         this.getDistrict(event.target.value)
-        this.setState({ stateName: event.target.value, districtName: '', talukName: '' })
+        this.setState({ stateName: event.target.value, districtName: '', talukName: '', waterbodyName: '' })
         this.setState({ isDistrictAvailable: true })
         this.setState({ isReady: false })
     }
     handleChangeDistrict = (event) => {
         this.getTaluk(event.target.value)
-        this.setState({ districtName: event.target.value, talukName: '' })
+        this.setState({ districtName: event.target.value, talukName: '', waterbodyName: '' })
         this.setState({ isTalukAvailable: true })
         this.setState({ isReady: false })
     }
     handleChangeTaluk = (event) => {
-        this.setState({ talukName: event.target.value })
+        this.getWaterBody(event.target.value)
+        this.setState({ talukName: event.target.value, waterbodyName: '' })
+        this.setState({ isWaterBodyAvailable: true })
+        this.setState({ isReady: false })
+
+    }
+    handleChangeWaterBody = (event) => {
+        this.setState({ waterbodyName: event.target.value })
         this.setState({ isReady: false })
         console.log(event.target.value)
+    }
+    handleChangeAdd = (event) => {
+        this.setState({ newCapacity: event.target.value })
     }
 
     getTaluk(districtId) {
         const URL = _url + "/taluks/TaluksForDistrict";
         axios.post(URL, { district_id: districtId }).then(res => {
             this.setState({ talukarray: res.data })
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+    getWaterBody(talukId) {
+        const URL = _url + "/waterinfo/waterbodyForTaluk";
+        axios.post(URL, { taluk_id: talukId }).then(res => {
+            this.setState({ waterbodyarray: res.data })
         }).catch(err => {
             console.log(err)
         })
@@ -78,40 +98,22 @@ export default class GraphForTaluk extends Component {
             console.log(err)
         })
     }
-    handleSubmit() {
-        const URL = _url + "/plantations/generateExcel/" + this.state.talukName
-        const URLf = _url + "/taluks/talukForId/" + this.state.talukName
-        axios.get(URLf).then(response => {
-            console.log(response.data[0].taluk_name)
-            this.setState({ taluk_name: response.data[0].taluk_name })
-        }).then(ress => {
-            axios.get(URL).then(res => {
-                this.setState({ exceldata: res.data })
-                console.log(res.data)
-            }).then(r => {
-                var csvRow = [];
-                var A = [['', 'Serial Number', 'Survey Number', 'Village Name', 'Area of Plantation', 'Crop Name', 'Plantation Data', 'Water Need in m^3', 'Water Need in m^3 in Account of Rainfall of this district', 'Discharge Need in m^3 / sec', 'Discharge Need in m^3 /sec in Account of Rainfall of this district']]
-                var re = this.state.exceldata
-                for (var i = 0; i < re.length; i++) {
-                    A.push([re[i].serial_no, re[i].survey_number, re[i].village_name, re[i].area_of_plantation, re[i].crop_name, re[i].plantation_date, re[i].water_need, re[i].water_need_rainfall, re[i].discharge_water_need, re[i].discharge_water_need_rainfall])
-                }
-                for (var j = 0; j < A.length; ++j) {
-                    csvRow.push(A[j].join(","))
-                }
-                var csvString = csvRow.join("%0A");
-                var a = document.createElement("a");
-                a.href = "data:attachment/csv" + csvString;
-                a.target = "_Blank";
-                a.download = this.state.taluk_name + "_crop_details.csv";
-                document.body.appendChild(a);
-                a.click();
-            }).catch(err => {
-                console.log(err)
-            })
+    handleChangeShow() {
+        if (this.state.isReady) {
+            this.setState({ isReady: false })
+        }
+        else { this.setState({ isReady: true }) }
+    }
+    updateAvailable() {
+        console.log(this.state.waterbodyName)
+        const URL = _url + "/waterinfo/update/" + this.state.waterbodyName;
+        axios.post(URL, { available_capacity: this.state.newCapacity }).then(res => {
+            this.setState({ isReady: false })
+            window.alert("Waterbody Availability Updated Successfully")
+            console.log(res)
         }).catch(err => {
             console.log(err)
         })
-
     }
 
     render() {
@@ -120,7 +122,7 @@ export default class GraphForTaluk extends Component {
                 <SideDrawer history={this.props.history}>
                 </SideDrawer>
                 <div>
-                    <h1 id="headertextforcomponent">Generate Report for Talukwise Crops</h1>
+                    <h1 id="headertextforcomponent">Graph For Talukwise Water Availability in Various Water Bodies</h1>
                 </div>
                 <div id="selectionuptotaluk">
                     {
@@ -172,13 +174,35 @@ export default class GraphForTaluk extends Component {
                                     }
                                 </Select>
                             </FormControl>
-                            {console.log(this.state.talukName)}
-                            <Button variant="contained" color="primary" onClick={this.handleSubmit}>
-                                Generate Excel
+                            <FormControl variant="outlined">
+                                <InputLabel id="demo-simple-select-outlined-label">Water Body</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    value={this.state.waterbodyName}
+                                    onChange={this.handleChangeWaterBody}
+                                    label="WaterBody"
+                                > {
+                                        this.state.waterbodyarray.map((element, index) => {
+                                            return <MenuItem value={element._id}>{element.tank_name}:{element.max_capacity}:{element.available_capacity}</MenuItem>
+                                        })
+
+                                    }
+                                </Select>
+                            </FormControl>
+                            <Button variant="contained" color="primary" onClick={this.handleChangeShow}>
+                                Edit Details
                         </Button>
+
                         </div>
                     }
                 </div>
+                {this.state.isReady ? <div id="alignitemscenter">
+                    <TextField id="outlined-basic" label="Available Capacity" variant="outlined" onChange={this.handleChangeAdd} />
+                    <Button variant="contained" color="Secondary" onClick={this.updateAvailable}>
+                        Update</Button>
+                </div> : ''
+                }
             </div>
 
         )

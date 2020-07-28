@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import HeaderImage from '../assets/header-image.jpg'
 import { TextField, Button } from '@material-ui/core'
 import './styles/register.css'
+import './styles/talukcomponents.css'
 import _url from './../URL'
 const axios = require('axios')
 
@@ -18,7 +19,9 @@ export default class RegisterUserComponent extends Component {
             isValidAadhar: true,
             isValidPassword: true,
             isValidPhoneNumber: true,
-            isPasswordMatch: true
+            isPasswordMatch: true,
+            isOTP: true,
+            OTP: ''
         }
     }
 
@@ -32,7 +35,7 @@ export default class RegisterUserComponent extends Component {
     }
 
     handleSubmit = () => {
-        this.setState({ isValidAadhar: false, isValidPassword: false, isValidPhoneNumber: false, isPasswordMatch: false })
+        this.setState({ isValidAadhar: false, isValidPassword: false, isValidPhoneNumber: false, isPasswordMatch: false, isOTP: false })
     }
     resetForm = () => {
         this.setState({ isValidAadhar: true, isValidPassword: true, isValidPhoneNumber: true, isPasswordMatch: true, isValidName: true, username: '', aadharNumber: '', phoneNumber: '', password: '', confirmPassword: '' })
@@ -52,6 +55,9 @@ export default class RegisterUserComponent extends Component {
         }
         if (!this.checkUsername()) {
             this.setState({ isValidName: false })
+        }
+        if (!this.checkOTP()) {
+            this.setState({ isOTP: false })
         }
         if (this.checkPassword() && this.checkAadhar() && this.isPasswordMatch() && this.checkPhoneNumber() && this.checkUsername()) {
             this.registerUser();
@@ -91,6 +97,26 @@ export default class RegisterUserComponent extends Component {
     checkUsername = () => {
         return (this.state.username.length > 0)
     }
+    generateOTP = () => {
+        const URL = _url + "/otp/create";
+        axios.post(URL, {
+            phone_number: this.state.phoneNumber,
+        }).then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+    checkOTP = () => {
+        const URL = _url + "/otp/" + this.state.phoneNumber;
+        axios.get(URL).then(res => {
+            if (res.data.length > 0) { return true }
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+            return false
+        })
+    }
 
     handleOnChange = (event) => {
         if (event.target.name === "username") {
@@ -111,6 +137,10 @@ export default class RegisterUserComponent extends Component {
         } else if (event.target.name === "cpassword") {
             this.setState({ confirmPassword: event.target.value })
             console.log(this.state.confirmPassword)
+        }
+        else if (event.target.name === "OTP") {
+            this.setState({ OTP: event.target.value })
+            console.log(this.state.OTP)
         }
     }
     render() {
@@ -151,7 +181,14 @@ export default class RegisterUserComponent extends Component {
                         onChange={this.handleOnChange}
                     /></div>
                     <div>
-                        <TextField variant="outlined" label="OTP" />
+
+                        <TextField variant="outlined" name="OTP" label="OTP" onClick={this.handleOnChange} />
+                        <div id="otp">
+                            <Button variant="contained" color="default" onClick={this.generateOTP}>
+                                Generate OTP
+                </Button>
+
+                        </div>
                     </div>
                     <div>
                         <Button id="B1" variant="contained" color="Primary" onClick={this.validateRegistration}>

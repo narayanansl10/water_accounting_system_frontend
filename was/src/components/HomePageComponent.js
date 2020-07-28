@@ -4,6 +4,7 @@ import SideDrawer from './DrawerComponent'
 import './styles/adminhome.css'
 import GraphForTaluk from './GraphForTaluk'
 import MapForTaluk from './MapForTaluk'
+import GraphRainfallComponent from './GraphRainfallComponent'
 import GraphForDistrict from './GraphForDistrict'
 import WaterBodyForTaluk from './WaterBodyForTaluk'
 import ExcelForTaluk from './ExcelForTaluk'
@@ -20,6 +21,12 @@ export default class HomePageComponent extends Component {
     }
     handleGreivances = (event) => {
         this.props.history.push('/home/grievance')
+    }
+    clickWater = (event) => {
+        this.props.history.push('/home/waterbodyfortalukupdate')
+    }
+    clickReport = (event) => {
+        this.props.history.push('/excelfortaluk')
     }
     addAnnouncements = (event) => {
         const URL = _url + "/announcements/create";
@@ -56,13 +63,16 @@ export default class HomePageComponent extends Component {
                         </div> : ''
 
                         }
-                        <Button variant="contained" color="Primary" >
+                        <Button variant="contained" color="Primary" onClick={this.clickReport}>
                             Generate Reports</Button>
-                        <Button variant="contained" color="Primary" >
+                        <Button variant="contained" color="Primary" onClick={this.clickWater}>
                             Update Water Body Availability</Button>
                     </Container>
 
                 </div>
+                {/* <div>
+                    <GraphRainfallComponent mode={2} AreaId={"5f0e83c87926c687298674ae"} />
+                </div> */}
             </div>
         )
     }

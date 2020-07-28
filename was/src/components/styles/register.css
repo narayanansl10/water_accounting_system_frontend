@@ -9,3 +9,7 @@
 .body-container-register > *{
     margin: 2%;
 }
+
+#otp{
+    margin-left: 20%;
+}

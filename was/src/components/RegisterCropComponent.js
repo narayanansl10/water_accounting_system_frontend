@@ -78,15 +78,18 @@ export default class RegisterCropComponent extends Component {
         this.setState({ cropName: event.target.value })
     }
     handleChangeSubmit = (event) => {
-        this.setState({ isValidVillage: true, isValidArea: true })
-        if (this.checkArea() && this.checkVillage() && this.checkSurvey()) {
-            this.callSubmit()
-        } else {
-            if (this.checkArea()) {
-                this.setState({ isValidArea: false })
-            }
-            if (this.checkVillage()) {
-                this.setState({ isValidVillage: false })
+        var value = window.confirm("I accept that all the details furnished are true to the best of my knowledge. I also accept that no further editing is possible")
+        if (value) {
+            this.setState({ isValidVillage: true, isValidArea: true })
+            if (this.checkArea() && this.checkVillage() && this.checkSurvey()) {
+                this.callSubmit()
+            } else {
+                if (this.checkArea()) {
+                    this.setState({ isValidArea: false })
+                }
+                if (this.checkVillage()) {
+                    this.setState({ isValidVillage: false })
+                }
             }
         }
     }

@@ -44,9 +44,6 @@ export default class SideDrawer extends Component {
     handleMaps = (text) => (event) => {
         this.props.history.push("/mapfortaluk")
     }
-    handleDataEdit = (text) => (event) => {
-        this.props.history.push("/home")
-    }
     handleWaterBody = (text) => (event) => {
         this.props.history.push("/waterbodyfortaluk")
     }
@@ -106,14 +103,6 @@ export default class SideDrawer extends Component {
                 ))}
             </List>
             <Divider />
-            <List>
-                {['DataEdit'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon onClick={this.handleDataEdit(text)}>{<StorageRoundedIcon />}</ListItemIcon>
-                        <ListItemText primary={text} onClick={this.handleDataEdit(text)} />
-                    </ListItem>
-                ))}
-            </List>
             <Divider />
             <List>
                 {['Logout'].map((text, index) => (
