@@ -30,6 +30,7 @@ export default class GraphForTaluk extends Component {
             exceldata: [],
         }
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleAggSubmit = this.handleAggSubmit.bind(this)
     }
     componentWillMount() {
         this.getStates()
@@ -114,6 +115,54 @@ export default class GraphForTaluk extends Component {
 
     }
 
+    handleAggSubmit() {
+        const URL = _url + "/plantations/talukwisecrops"
+        const URLf = _url + "/taluks/talukForId/" + this.state.talukName
+        const URLc = _url + "/cropinfo"
+        axios.get(URLf).then(response => {
+            this.setState({ taluk_name: response.data[0].taluk_name })
+        }).then(ress => {
+            axios.post(URL, { taluk_id: this.state.talukName }).then(res => {
+                this.setState({ exceldata: res.data })
+                //console.log(res.data)
+            }).then(r => {
+                axios.post(URLc, {}).then(rr => {
+                    var csvRow = [];
+                    var A = [['', 'Serial Number', 'Crop Name', ' Total Area of Plantation', 'Total Water Need in m^3', 'Total Water Need in m^3 in Account of Rainfall of this district', 'Total Discharge Need in m^3 / sec', 'Total Discharge Need in m^3 /sec in Account of Rainfall of this district']]
+                    var re = this.state.exceldata
+                    var cropname = 'Default'
+                    console.log(rr)
+                    for (var i = 0; i < re.length; i++) {
+                        for (var j = 0; j < rr.data.length; j++) {
+                            if (re[i]._id === rr.data[j]._id) {
+                                cropname = rr.data[j].crop_name
+                                break;
+                            }
+                        }
+                        A.push([i + 1, cropname, re[i].sum_area, re[i].sum_of_water_need, re[i].sum_of_water_need_rainfall, re[i].sum_of_discharge_water_need, re[i].sum_of_discharge_water_need_rainfall])
+                    }
+                    for (var j = 0; j < A.length; ++j) {
+                        csvRow.push(A[j].join(","))
+                    }
+                    var csvString = csvRow.join("%0A");
+                    var a = document.createElement("a");
+                    a.href = "data:attachment/csv" + csvString;
+                    a.target = "_Blank";
+                    a.download = this.state.taluk_name + "_crop_aggregated_details.csv";
+                    document.body.appendChild(a);
+                    a.click();
+                }).catch(err => {
+                    console.log(err)
+                })
+            }).catch(err => {
+                console.log(err)
+            })
+        }).catch(err => {
+            console.log(err)
+        })
+
+    }
+
     render() {
         return (
             <div>
@@ -174,7 +223,10 @@ export default class GraphForTaluk extends Component {
                             </FormControl>
                             {console.log(this.state.talukName)}
                             <Button variant="contained" color="primary" onClick={this.handleSubmit}>
-                                Generate Excel
+                                Generate Excel with Complete Details
+                        </Button>
+                            <Button variant="contained" color="primary" onClick={this.handleAggSubmit}>
+                                Generate Excel with Aggregated Details
                         </Button>
                         </div>
                     }
