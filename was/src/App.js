@@ -10,6 +10,7 @@ import WaterBodyForTaluk from './components/WaterBodyForTaluk'
 import WaterBodyForTalukUpdate from './components/WaterBodyForTalukUpdate'
 import ExcelForTaluk from './components/ExcelForTaluk'
 import MapForTaluk from './components/MapForTaluk'
+import MapReport from './components/MapReport'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 class App extends React.Component {
@@ -26,6 +27,7 @@ class App extends React.Component {
           <Route exact path='/excelfortaluk' component={ExcelForTaluk} />
           <Route exact path='/mapfortaluk' component={MapForTaluk} />
           <Route exact path='/waterbodyfortaluk' component={WaterBodyForTaluk} />
+          <Route exact path='/mapreport' component={MapReport} />
           <Route exact path='/home/waterbodyfortalukupdate' component={WaterBodyForTalukUpdate} />
           <Route exact path='/home/grievance' component={GrievanceComponent} />
         </BrowserRouter>

@@ -47,8 +47,8 @@ export default class SideDrawer extends Component {
     handleWaterBody = (text) => (event) => {
         this.props.history.push("/waterbodyfortaluk")
     }
-    handleDistrictwiseData = (text) => (event) => {
-        this.props.history.push("/home")
+    handleCropwiseData = (text) => (event) => {
+        this.props.history.push("/mapreport")
     }
 
     list = (anchor) => (
@@ -86,10 +86,10 @@ export default class SideDrawer extends Component {
             </List>
             <Divider />
             <List>
-                {['Districtwise Data'].map((text, index) => (
+                {['Cropwise Data'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon onClick={this.handleDistrictwiseData(text)}>{<BarChartRoundedIcon />}</ListItemIcon>
-                        <ListItemText primary={text} onClick={this.handleDistrictwiseData(text)} />
+                        <ListItemIcon onClick={this.handleCropwiseData(text)}>{<BarChartRoundedIcon />}</ListItemIcon>
+                        <ListItemText primary={text} onClick={this.handleCropwiseData(text)} />
                     </ListItem>
                 ))}
             </List>
