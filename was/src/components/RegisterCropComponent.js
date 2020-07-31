@@ -214,6 +214,13 @@ export default class RegisterCropComponent extends Component {
         localStorage.removeItem('token')
         this.props.history.push("/")
     }
+    getMatchedCrop = (params) => {
+        for (var i = 0; i < this.state.croparray.length; i++) {
+            if (this.state.croparray[i]._id === params) {
+                return this.state.croparray[i].crop_name
+            }
+        }
+    }
 
 
     render() {
@@ -346,12 +353,18 @@ export default class RegisterCropComponent extends Component {
                         this.state.isDataAvailable && this.state.isViewReady ?
                             this.state.plantationData.map((element, index) => {
                                 return (
-                                    <div>
+                                    <div id="displayCrop">
                                         <div>
-                                            Crop: {element.crop_id}
-                                            Area: {element.area_of_plantation}
-                                            Date: {element.plantation_date}
-                                            Village Name: {element.village_name}
+                                            Crop: {this.getMatchedCrop(element.crop_id)}&nbsp;
+                                        </div>
+                                        <div>
+                                            Area: {element.area_of_plantation}&nbsp;
+                                        </div>
+                                        <div>
+                                            Date: {element.plantation_date}&nbsp;
+                                        </div>
+                                        <div>
+                                            Village Name: {element.village_name}&nbsp;
                                         </div>
                                     </div>
                                 )

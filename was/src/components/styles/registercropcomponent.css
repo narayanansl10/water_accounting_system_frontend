@@ -18,3 +18,12 @@
 #B1{
     background-color: 'green';
 }
+
+#displayCrop {
+    display: flex;
+    flex-direction: row;
+}
+
+#displayCrop > *{
+    flex: 1;
+}

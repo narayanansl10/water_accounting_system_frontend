@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-//import samplevideo from '../assets/samplevideo.mp4'
+import samplevideo from '../assets/samplevideo.mp4'
 
 const useStyles = makeStyles({
     root: {
@@ -25,7 +25,7 @@ export default function ImgMediaCard() {
                     component="video"
                     alt="Water"
                     height="140"
-                    src=''
+                    src={samplevideo}
                     title="Intelligent Farming"
                     controls
                 />
