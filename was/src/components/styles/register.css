@@ -1,15 +1,26 @@
 .body-container-register{
     display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin:auto;
-    /* margin-top: 20%; */
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: right;
     align-items: center;
 }
-.body-container-register > *{
-    margin: 2%;
+.inputFieldContainer {
+    align-items: center;
+    width: 20%;
+    padding: 2%;
 }
-
-#otp{
-    margin-left: 20%;
+@media (max-width: 800px) {
+    .inputFieldContainer {
+      flex: 40%;
+      padding: 2%;
+    }
+}
+@media (max-width: 500px) {
+    .inputFieldContainer {
+      flex: 100%;
+      padding: 2%;
+    }
 }

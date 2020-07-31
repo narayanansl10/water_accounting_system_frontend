@@ -153,48 +153,95 @@ export default class RegisterUserComponent extends Component {
                 </div>
                 <div className="body-container-register">
 
-                    <div className="usernameField"><TextField error={!this.state.isValidName} name="username" id="outlined-basic" label="Name" variant="outlined" value={this.state.username} onChange={this.handleOnChange} helperText={!this.state.isValidName ? "Name cannot be empty" : ''} /></div>
-                    <div className="aadharField"><TextField error={!this.state.isValidAadhar} name="aadharnumber" id="outlined-basic" label="Aadhar Number" variant="outlined" value={this.state.aadharNumber} onChange={this.handleOnChange} helperText={!this.state.isValidAadhar ? "Invalid Aadhar format" : ''} /></div>
-                    <div className="phoneField"><TextField error={!this.state.isValidPhoneNumber} name="phonenumber" id="outlined-basic" label="Phone Number" variant="outlined" value={this.state.phoneNumber} onChange={this.handleOnChange} helperText={!this.state.isValidPhoneNumber ? "Invalid Phone Number" : ''} /></div>
-                    <div className="passwordField"><TextField
-                        error={!this.state.isValidPassword}
-                        id="outlined-password-input"
-                        label="Password"
-                        type="password"
-                        name="password"
-                        autoComplete="current-password"
-                        variant="outlined"
-                        helperText={!this.state.isValidPassword ? "Password must contain atleast 8 characters" : ''}
-                        value={this.state.password}
-                        onChange={this.handleOnChange}
-                    /></div>
-                    <div className="confirmField"><TextField
-                        error={!this.state.isPasswordMatch}
-                        id="outlined-password-input"
-                        label="Confirm Password"
-                        type="password"
-                        name="cpassword"
-                        autoComplete="current-password"
-                        variant="outlined"
-                        helperText={!this.state.isPasswordMatch ? "Confirm Password is not matched" : ''}
-                        value={this.state.confirmPassword}
-                        onChange={this.handleOnChange}
-                    /></div>
-                    <div>
-
-                        <TextField variant="outlined" name="OTP" label="OTP" onClick={this.handleOnChange} />
-                        <div id="otp">
-                            <Button variant="contained" color="default" onClick={this.generateOTP}>
-                                Generate OTP
-                </Button>
-
-                        </div>
+                    <div className="inputFieldContainer">
+                        <TextField
+                            error={!this.state.isValidName}
+                            className="inputField"
+                            name="username"
+                            id="outlined-basic"
+                            label="Name"
+                            variant="outlined"
+                            value={this.state.username}
+                            onChange={this.handleOnChange}
+                            helperText={!this.state.isValidName ? "Name cannot be empty" : 'Enter your name here'}
+                        />
                     </div>
-                    <div>
-                        <Button id="B1" variant="contained" color="Primary" onClick={this.validateRegistration}>
+                    <div className="inputFieldContainer">
+                        <TextField
+                            error={!this.state.isValidAadhar}
+                            className="inputField"
+                            name="aadharnumber"
+                            id="outlined-basic"
+                            label="Aadhar Number"
+                            variant="outlined"
+                            value={this.state.aadharNumber}
+                            onChange={this.handleOnChange}
+                            helperText={!this.state.isValidAadhar ? "Invalid Aadhar format" : 'Enter your 12-digit aadhar number'}
+                        />
+                    </div>
+                    <div className="inputFieldContainer">
+                        <TextField
+                            error={!this.state.isValidPhoneNumber}
+                            className="inputField"
+                            name="phonenumber"
+                            id="outlined-basic"
+                            label="Phone Number"
+                            variant="outlined"
+                            value={this.state.phoneNumber}
+                            onChange={this.handleOnChange}
+                            helperText={!this.state.isValidPhoneNumber ? "Invalid Phone Number" : 'Provide your 10-digit phone number'}
+                        />
+                    </div>
+                    <div className="inputFieldContainer">
+                        <TextField
+                            error={!this.state.isValidPassword}
+                            className="inputField"
+                            id="outlined-password-input"
+                            label="Password"
+                            type="password"
+                            name="password"
+                            autoComplete="current-password"
+                            variant="outlined"
+                            helperText={!this.state.isValidPassword ? "Password must contain atleast 8 characters" : 'Create a new password'}
+                            value={this.state.password}
+                            onChange={this.handleOnChange}
+                        />
+                    </div>
+                    <div className="inputFieldContainer">
+                        <TextField
+                            error={!this.state.isPasswordMatch}
+                            className="inputField"
+                            id="outlined-password-input"
+                            label="Confirm Password"
+                            type="password"
+                            name="cpassword"
+                            autoComplete="current-password"
+                            variant="outlined"
+                            helperText={!this.state.isPasswordMatch ? "Confirm Password is not matched" : 'Renter the password'}
+                            value={this.state.confirmPassword}
+                            onChange={this.handleOnChange}
+                        />
+                    </div>
+                    <div className="inputFieldContainer">
+                        <TextField
+                            className="inputField"
+                            className="inputField"
+                            variant="outlined"
+                            name="OTP"
+                            label="OTP" onClick={this.handleOnChange}
+                            helperText="Enter the OTP recived in your mobile"
+                        />
+                    </div>
+                    <div className="inputFieldContainer">
+                        <Button className="inputField" variant="contained" color="default" onClick={this.generateOTP}>
+                            Generate OTP
+                            </Button>
+                    </div>
+                    <div className="inputFieldContainer">
+                        <Button className="submitField" id="B1" variant="contained" color="Primary" onClick={this.validateRegistration}>
                             Register
                 </Button>
-                        <Button id="B1" variant="contained" color="Primary" onClick={this.resetForm}>
+                        <Button className="submitField" id="B1" variant="contained" color="Primary" onClick={this.resetForm}>
                             Reset
                 </Button>
                     </div>
