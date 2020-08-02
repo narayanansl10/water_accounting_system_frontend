@@ -28,8 +28,8 @@ class App extends React.Component {
           <Route exact path='/mapfortaluk' component={MapForTaluk} />
           <Route exact path='/waterbodyfortaluk' component={WaterBodyForTaluk} />
           <Route exact path='/mapreport' component={MapReport} />
-          <Route exact path='/home/waterbodyfortalukupdate' component={WaterBodyForTalukUpdate} />
-          <Route exact path='/home/grievance' component={GrievanceComponent} />
+          <Route exact path='/waterbodyfortalukupdate' component={WaterBodyForTalukUpdate} />
+          <Route exact path='/grievance' component={GrievanceComponent} />
         </BrowserRouter>
       </div>
     )

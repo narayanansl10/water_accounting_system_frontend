@@ -16,6 +16,9 @@ import StorageRoundedIcon from '@material-ui/icons/StorageRounded';
 import DataUsageRoundedIcon from '@material-ui/icons/DataUsageRounded';
 import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
 import PowerSettingsNewRoundedIcon from '@material-ui/icons/PowerSettingsNewRounded';
+import ChatBubbleRoundedIcon from '@material-ui/icons/ChatBubbleRounded';
+import UpdateRoundedIcon from '@material-ui/icons/UpdateRounded';
+import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import './styles/drawer.css'
 
 export default class SideDrawer extends Component {
@@ -49,6 +52,15 @@ export default class SideDrawer extends Component {
     }
     handleCropwiseData = (text) => (event) => {
         this.props.history.push("/mapreport")
+    }
+    handleGrievances = (text) => (event) => {
+        this.props.history.push("/grievance")
+    }
+    handleAvailability = (text) => (event) => {
+        this.props.history.push("/waterbodyfortalukupdate")
+    }
+    handleReports = (text) => (event) => {
+        this.props.history.push('/excelfortaluk')
     }
 
     list = (anchor) => (
@@ -102,6 +114,43 @@ export default class SideDrawer extends Component {
                     </ListItem>
                 ))}
             </List>
+            <Divider />
+            {/* <List>
+                {['Announcements'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon onClick={this.handleAnnouncements(text)}>{<DataUsageRoundedIcon />}</ListItemIcon>
+                        <ListItemText primary={text} onClick={this.handleAnnouncements(text)} />
+                    </ListItem>
+                ))}
+            </List>
+            <Divider /> */}
+            <List>
+                {['Grievances'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon onClick={this.handleGrievances(text)}>{<ChatBubbleRoundedIcon />}</ListItemIcon>
+                        <ListItemText primary={text} onClick={this.handleGrievances(text)} />
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {['Update Availability'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon onClick={this.handleAvailability(text)}>{<UpdateRoundedIcon />}</ListItemIcon>
+                        <ListItemText primary={text} onClick={this.handleAvailability(text)} />
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {['Generate Reports'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon onClick={this.handleReports(text)}>{<DescriptionRoundedIcon />}</ListItemIcon>
+                        <ListItemText primary={text} onClick={this.handleReports(text)} />
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
             <Divider />
             <Divider />
             <List>

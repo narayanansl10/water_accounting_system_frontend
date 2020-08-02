@@ -19,15 +19,6 @@ export default class HomePageComponent extends Component {
             announcementText: false
         }
     }
-    handleGreivances = (event) => {
-        this.props.history.push('/home/grievance')
-    }
-    clickWater = (event) => {
-        this.props.history.push('/home/waterbodyfortalukupdate')
-    }
-    clickReport = (event) => {
-        this.props.history.push('/excelfortaluk')
-    }
     addAnnouncements = (event) => {
         const URL = _url + "/announcements/create";
         axios.post(URL, { name: this.state.announcementText }).then(res => {
@@ -50,10 +41,8 @@ export default class HomePageComponent extends Component {
                 </SideDrawer>
                 <h1 id="welcometext">Welcome Administrator</h1>
                 <div>
-                    <h2 id="welcometext">Quick Access</h2>
+                    <h2 id="welcometext">Use Menu For Navigation</h2>
                     <Container fixed id="alignitemscenter">
-                        <Button variant="contained" color="Primary" onClick={this.handleGreivances}>
-                            Grievances</Button>
                         <Button variant="contained" color="Primary" onClick={this.toggleAnnouncements}>
                             Add Announcements</Button>
                         {this.state.isAnnouncementReady ? <div id="alignitemscenter">
@@ -61,18 +50,11 @@ export default class HomePageComponent extends Component {
                             <Button variant="contained" color="Secondary" onClick={this.addAnnouncements}>
                                 Add</Button>
                         </div> : ''
-
                         }
-                        <Button variant="contained" color="Primary" onClick={this.clickReport}>
-                            Generate Reports</Button>
-                        <Button variant="contained" color="Primary" onClick={this.clickWater}>
-                            Update Water Body Availability</Button>
+
                     </Container>
 
                 </div>
-                {/* <div>
-                    <GraphRainfallComponent mode={2} AreaId={"5f0e83c87926c687298674ae"} />
-                </div> */}
             </div>
         )
     }
