@@ -1,2 +1,2 @@
-const _url = "http://localhost:4000";
+const _url = "https://water-accounting-system.herokuapp.com/";
 export default _url
