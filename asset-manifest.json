@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/water_accounting_system_frontend/static/css/main.bdc5c357.chunk.css",
+    "main.js": "/water_accounting_system_frontend/static/js/main.7ede1231.chunk.js",
+    "main.js.map": "/water_accounting_system_frontend/static/js/main.7ede1231.chunk.js.map",
+    "runtime-main.js": "/water_accounting_system_frontend/static/js/runtime-main.a20ee9be.js",
+    "runtime-main.js.map": "/water_accounting_system_frontend/static/js/runtime-main.a20ee9be.js.map",
+    "static/css/2.156fe21f.chunk.css": "/water_accounting_system_frontend/static/css/2.156fe21f.chunk.css",
+    "static/js/2.1db4bc2b.chunk.js": "/water_accounting_system_frontend/static/js/2.1db4bc2b.chunk.js",
+    "static/js/2.1db4bc2b.chunk.js.map": "/water_accounting_system_frontend/static/js/2.1db4bc2b.chunk.js.map",
+    "index.html": "/water_accounting_system_frontend/index.html",
+    "precache-manifest.39ee9f604b109e5d93acd4c9d435a2dd.js": "/water_accounting_system_frontend/precache-manifest.39ee9f604b109e5d93acd4c9d435a2dd.js",
+    "service-worker.js": "/water_accounting_system_frontend/service-worker.js",
+    "static/css/2.156fe21f.chunk.css.map": "/water_accounting_system_frontend/static/css/2.156fe21f.chunk.css.map",
+    "static/css/main.bdc5c357.chunk.css.map": "/water_accounting_system_frontend/static/css/main.bdc5c357.chunk.css.map",
+    "static/js/2.1db4bc2b.chunk.js.LICENSE.txt": "/water_accounting_system_frontend/static/js/2.1db4bc2b.chunk.js.LICENSE.txt",
+    "static/media/header-image.jpg": "/water_accounting_system_frontend/static/media/header-image.4c629732.jpg",
+    "static/media/samplevideo.mp4": "/water_accounting_system_frontend/static/media/samplevideo.6f339679.mp4"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a20ee9be.js",
+    "static/css/2.156fe21f.chunk.css",
+    "static/js/2.1db4bc2b.chunk.js",
+    "static/css/main.bdc5c357.chunk.css",
+    "static/js/main.7ede1231.chunk.js"
+  ]
+}
