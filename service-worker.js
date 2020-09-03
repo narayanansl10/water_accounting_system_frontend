@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/water_accounting_system_frontend/precache-manifest.39ee9f604b109e5d93acd4c9d435a2dd.js"
+  "/water_accounting_system_frontend/precache-manifest.5a821564f8cc0d591f1751d717a189c0.js"
 );
 
 self.addEventListener('message', (event) => {

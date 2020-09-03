@@ -1,27 +1,36 @@
 {
   "files": {
-    "main.css": "/water_accounting_system_frontend/static/css/main.bdc5c357.chunk.css",
-    "main.js": "/water_accounting_system_frontend/static/js/main.7ede1231.chunk.js",
-    "main.js.map": "/water_accounting_system_frontend/static/js/main.7ede1231.chunk.js.map",
+    "main.css": "/water_accounting_system_frontend/static/css/main.afe8c96b.chunk.css",
+    "main.js": "/water_accounting_system_frontend/static/js/main.e6075b05.chunk.js",
+    "main.js.map": "/water_accounting_system_frontend/static/js/main.e6075b05.chunk.js.map",
     "runtime-main.js": "/water_accounting_system_frontend/static/js/runtime-main.a20ee9be.js",
     "runtime-main.js.map": "/water_accounting_system_frontend/static/js/runtime-main.a20ee9be.js.map",
     "static/css/2.156fe21f.chunk.css": "/water_accounting_system_frontend/static/css/2.156fe21f.chunk.css",
-    "static/js/2.1db4bc2b.chunk.js": "/water_accounting_system_frontend/static/js/2.1db4bc2b.chunk.js",
-    "static/js/2.1db4bc2b.chunk.js.map": "/water_accounting_system_frontend/static/js/2.1db4bc2b.chunk.js.map",
+    "static/js/2.f90106ff.chunk.js": "/water_accounting_system_frontend/static/js/2.f90106ff.chunk.js",
+    "static/js/2.f90106ff.chunk.js.map": "/water_accounting_system_frontend/static/js/2.f90106ff.chunk.js.map",
     "index.html": "/water_accounting_system_frontend/index.html",
-    "precache-manifest.39ee9f604b109e5d93acd4c9d435a2dd.js": "/water_accounting_system_frontend/precache-manifest.39ee9f604b109e5d93acd4c9d435a2dd.js",
+    "precache-manifest.5a821564f8cc0d591f1751d717a189c0.js": "/water_accounting_system_frontend/precache-manifest.5a821564f8cc0d591f1751d717a189c0.js",
     "service-worker.js": "/water_accounting_system_frontend/service-worker.js",
     "static/css/2.156fe21f.chunk.css.map": "/water_accounting_system_frontend/static/css/2.156fe21f.chunk.css.map",
-    "static/css/main.bdc5c357.chunk.css.map": "/water_accounting_system_frontend/static/css/main.bdc5c357.chunk.css.map",
-    "static/js/2.1db4bc2b.chunk.js.LICENSE.txt": "/water_accounting_system_frontend/static/js/2.1db4bc2b.chunk.js.LICENSE.txt",
-    "static/media/header-image.jpg": "/water_accounting_system_frontend/static/media/header-image.4c629732.jpg",
-    "static/media/samplevideo.mp4": "/water_accounting_system_frontend/static/media/samplevideo.6f339679.mp4"
+    "static/css/main.afe8c96b.chunk.css.map": "/water_accounting_system_frontend/static/css/main.afe8c96b.chunk.css.map",
+    "static/js/2.f90106ff.chunk.js.LICENSE.txt": "/water_accounting_system_frontend/static/js/2.f90106ff.chunk.js.LICENSE.txt",
+    "static/media/GreenMarker.png": "/water_accounting_system_frontend/static/media/GreenMarker.4ae2cc37.png",
+    "static/media/RedMarker.png": "/water_accounting_system_frontend/static/media/RedMarker.16761ddd.png",
+    "static/media/blacksoil.jpg": "/water_accounting_system_frontend/static/media/blacksoil.9789d510.jpg",
+    "static/media/cwc.jpg": "/water_accounting_system_frontend/static/media/cwc.333afe74.jpg",
+    "static/media/goi2.png": "/water_accounting_system_frontend/static/media/goi2.e2a0c970.png",
+    "static/media/header-image.jpg": "/water_accounting_system_frontend/static/media/header-image.57f4656a.jpg",
+    "static/media/loamysoil.jpg": "/water_accounting_system_frontend/static/media/loamysoil.b86418c0.jpg",
+    "static/media/peatysoil.jpg": "/water_accounting_system_frontend/static/media/peatysoil.f618ee05.jpg",
+    "static/media/samplevideo.mp4": "/water_accounting_system_frontend/static/media/samplevideo.6f339679.mp4",
+    "static/media/sandysoil.jpg": "/water_accounting_system_frontend/static/media/sandysoil.f792997a.jpg",
+    "static/media/siltysoil.jpg": "/water_accounting_system_frontend/static/media/siltysoil.aae42aaa.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.a20ee9be.js",
     "static/css/2.156fe21f.chunk.css",
-    "static/js/2.1db4bc2b.chunk.js",
-    "static/css/main.bdc5c357.chunk.css",
-    "static/js/main.7ede1231.chunk.js"
+    "static/js/2.f90106ff.chunk.js",
+    "static/css/main.afe8c96b.chunk.css",
+    "static/js/main.e6075b05.chunk.js"
   ]
 }
