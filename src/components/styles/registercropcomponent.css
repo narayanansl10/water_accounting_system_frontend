@@ -27,3 +27,15 @@
 #displayCrop > *{
     flex: 1;
 }
+
+#imgcontainer{
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+}
+
+#imgcontainer > *{
+    flex: 1;
+    margin-left: 1%;
+    max-width: 18.7%;
+}

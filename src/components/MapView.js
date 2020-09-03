@@ -61,7 +61,7 @@ export default class MapView extends Component {
                                 <div>
                                     <h2>{this.state.activeWB.tank_name}</h2>
                                     <p>{this.state.activeWB.village}</p>
-                                    <p>{this.state.activeWB.max_capacity}:{this.state.activeWB.available_capacitys}</p>
+                                    <p>{this.state.activeWB.max_capacity}:{this.state.activeWB.available_capacity}</p>
                                 </div>
                             </Popup>
                         )

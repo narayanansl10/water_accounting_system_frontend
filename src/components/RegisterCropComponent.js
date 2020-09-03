@@ -3,6 +3,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { TextField, Button } from '@material-ui/core'
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import blacksoil from '../assets/blacksoil.jpg';
+import loamysoil from '../assets/loamysoil.jpg';
+import siltysoil from '../assets/siltysoil.jpg';
+import peatysoil from '../assets/peatysoil.jpg';
+import sandysoil from '../assets/sandysoil.jpg';
 import HeaderImage from '../assets/header-image.jpg'
 import Select from '@material-ui/core/Select';
 import './styles/registercropcomponent.css'
@@ -24,10 +29,14 @@ export default class RegisterCropComponent extends Component {
             date: "",
             surveynumber: "",
             greivancetext: "",
+            waterResource: "",
+            waterResourcePercentage: "",
+            soilName: "",
             statearray: [],
             districtarray: [],
             talukarray: [],
             croparray: [],
+            soilarray: [],
             isDistrictAvailable: false,
             isTalukAvailable: false,
             plantationData: [],
@@ -38,13 +47,16 @@ export default class RegisterCropComponent extends Component {
             isValidArea: true,
             isValidSurvey: true,
             isBack: false,
-            isGreivanceReady: false
+            isGreivanceReady: false,
+            isValidWaterResourcePercentage: false,
+            isSoilAvailable: false
         }
     }
     componentWillMount() {
         this.getPlantationData()
         this.getStates()
         this.getCrops()
+        this.getSoilTypes()
     }
     handleChangeState = (event) => {
         this.getDistrict(event.target.value)
@@ -62,6 +74,9 @@ export default class RegisterCropComponent extends Component {
     handleChangeVillage = (event) => {
         this.setState({ village: event.target.value })
     }
+    handleChangeWaterResourcePercentage = (event) => {
+        this.setState({ waterResourcePercentage: event.target.value })
+    }
     handleChangeSurvey = (event) => {
         this.setState({ surveynumber: event.target.value })
     }
@@ -77,11 +92,17 @@ export default class RegisterCropComponent extends Component {
     handleChangeCrop = (event) => {
         this.setState({ cropName: event.target.value })
     }
+    handleChangeSoil = (event) => {
+        this.setState({ soilName: event.target.value, isSoilAvailable: true })
+    }
+    handleChangeWaterResource = (event) => {
+        this.setState({ waterResource: event.target.value })
+    }
     handleChangeSubmit = (event) => {
         var value = window.confirm("I accept that all the details furnished are true to the best of my knowledge. I also accept that no further editing is possible")
         if (value) {
             this.setState({ isValidVillage: true, isValidArea: true })
-            if (this.checkArea() && this.checkVillage() && this.checkSurvey()) {
+            if (this.checkArea() && this.checkVillage() && this.checkSurvey() && this.checkWaterResourcePercentage()) {
                 this.callSubmit()
             } else {
                 if (this.checkArea()) {
@@ -89,6 +110,9 @@ export default class RegisterCropComponent extends Component {
                 }
                 if (this.checkVillage()) {
                     this.setState({ isValidVillage: false })
+                }
+                if (this.checkWaterResourcePercentage()) {
+                    this.setState({ isValidWaterResourcePercentage: false })
                 }
             }
         }
@@ -132,21 +156,43 @@ export default class RegisterCropComponent extends Component {
         const decoded = jwt(localStorage.token)
         console.log(decoded)
         const URL = _url + "/plantations/create";
-        axios.post(URL, {
-            crop_id: this.state.cropName,
-            area_of_plantation: this.state.area,
-            plantation_date: this.state.date,
-            taluk_id: this.state.talukName,
-            village_name: this.state.village,
-            survey_number: this.state.surveynumber,
-            login_details: decoded.data._id
-        }).then(res => {
-            console.log(res);
-            window.alert("Added Plantation Details")
-            this.getPlantationData()
-        }).catch(err => {
-            console.log(err)
-        })
+        if (this.state.waterResourcePercentage != '')
+            axios.post(URL, {
+                crop_id: this.state.cropName,
+                area_of_plantation: this.state.area,
+                plantation_date: this.state.date,
+                taluk_id: this.state.talukName,
+                village_name: this.state.village,
+                survey_number: this.state.surveynumber,
+                login_details: decoded.data._id,
+                soil_id: this.state.soilName,
+                water_resource: this.state.waterResource,
+                water_resource_percentage: this.state.waterResourcePercentage
+            }).then(res => {
+                console.log(res);
+                window.alert("Added Plantation Details")
+                this.getPlantationData()
+            }).catch(err => {
+                console.log(err)
+            })
+        else
+            axios.post(URL, {
+                crop_id: this.state.cropName,
+                area_of_plantation: this.state.area,
+                plantation_date: this.state.date,
+                taluk_id: this.state.talukName,
+                village_name: this.state.village,
+                survey_number: this.state.surveynumber,
+                login_details: decoded.data._id,
+                soil_id: this.state.soilName,
+                water_resource: this.state.waterResource
+            }).then(res => {
+                console.log(res);
+                window.alert("Added Plantation Details")
+                this.getPlantationData()
+            }).catch(err => {
+                console.log(err)
+            })
     }
 
     getPlantationData() {
@@ -197,9 +243,23 @@ export default class RegisterCropComponent extends Component {
         })
     }
 
+    getSoilTypes() {
+        const URL = _url + "/soilinfo";
+        axios.post(URL).then(res => {
+            this.setState({ soilarray: res.data })
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     checkArea = () => {
         const regex = /^[0-9]*.?[0-9]*$/
         return regex.test(this.state.area)
+    }
+
+    checkWaterResourcePercentage = () => {
+        const regex = /^[0-9]*.?[0-9]*$/
+        return regex.test(this.state.waterResourcePercentage)
     }
 
     checkVillage = () => {
@@ -322,8 +382,47 @@ export default class RegisterCropComponent extends Component {
                                             }
                                         </Select>
                                     </FormControl>
-                                    <TextField id="outlined-basic" label="Date of plantation" variant="outlined" type="date" onChange={this.handleChangeDate} />
 
+                                    <FormControl variant="outlined">
+                                        <InputLabel id="demo-simple-select-outlined-label">Type of soil</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-outlined-label"
+                                            id="demo-simple-select-outlined"
+                                            value={this.state.soilName}
+                                            onChange={this.handleChangeSoil}
+                                            label="Type of soil"
+                                        > {
+                                                this.state.soilarray.map((element, index) => {
+                                                    return <MenuItem value={element._id}>{element.soil_name}</MenuItem>
+                                                })
+                                            }
+                                        </Select>
+                                    </FormControl>
+                                    <FormControl variant="outlined">
+                                        <InputLabel id="demo-simple-select-outlined-label">Water Resource used</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-outlined-label"
+                                            id="demo-simple-select-outlined"
+                                            value={this.state.waterResource}
+                                            onChange={this.handleChangeWaterResource}
+                                            label="Water Resource used"
+                                        >
+                                            <MenuItem value="GroundWater">Ground Water</MenuItem>
+                                            <MenuItem value="SurfaceWater">Surface Water</MenuItem>
+                                            <MenuItem value="Both">Both</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    <TextField id="outlined-basic" label="Percentage of Ground Water used" variant="outlined" onChange={this.handleChangeWaterResourcePercentage} disabled={(this.state.waterResource === "Both") ? false : true} />
+                                    <TextField id="outlined-basic" label="Date of plantation" variant="outlined" type="date" onChange={this.handleChangeDate} />
+                                </div>
+                                <div id="selection2">
+                                    <div id="imgcontainer">
+                                        <img src={blacksoil}></img>
+                                        <img src={loamysoil}></img>
+                                        <img src={peatysoil}></img>
+                                        <img src={siltysoil}></img>
+                                        <img src={sandysoil}></img>
+                                    </div>
                                 </div>
                                 <div id="selection2">
                                     <Button id="B1" variant="contained" color="primary" onClick={this.handleChangeSubmit}>
@@ -361,7 +460,7 @@ export default class RegisterCropComponent extends Component {
                                             Area: {element.area_of_plantation}&nbsp;
                                         </div>
                                         <div>
-                                            Date: {element.plantation_date}&nbsp;
+                                            Date: {new Date(element.plantation_date).toLocaleDateString("en-US")}&nbsp;
                                         </div>
                                         <div>
                                             Village Name: {element.village_name}&nbsp;
@@ -386,7 +485,7 @@ export default class RegisterCropComponent extends Component {
                         </div> : ''
                     }
                 </div>
-            </div>
+            </div >
 
         )
     }

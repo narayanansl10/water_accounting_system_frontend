@@ -5,6 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import WaterAvailabilityComponent from './WaterAvailabilityComponent'
 import Select from '@material-ui/core/Select';
 import SideDrawer from './DrawerComponent'
+import HeaderBarComponent from './HeaderBarComponent'
 import './styles/registercropcomponent.css'
 import _url from './../URL'
 import { Button } from '@material-ui/core';
@@ -104,8 +105,9 @@ export default class WaterBodyForTaluk extends Component {
     render() {
         return (
             <div>
-                <SideDrawer history={this.props.history}>
-                </SideDrawer>
+                {/* <SideDrawer history={this.props.history}>
+                </SideDrawer> */}
+                <HeaderBarComponent history={this.props.history}></HeaderBarComponent>
                 <div>
                     <h1 id="headertextforcomponent">Graph For Talukwise Water Availability in Various Water Bodies</h1>
                 </div>

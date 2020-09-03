@@ -62,6 +62,9 @@ export default class SideDrawer extends Component {
     handleReports = (text) => (event) => {
         this.props.history.push('/excelfortaluk')
     }
+    handleLand = (text) => (event) => {
+        this.props.history.push('/land')
+    }
 
     list = (anchor) => (
         <div
@@ -80,7 +83,7 @@ export default class SideDrawer extends Component {
             </List>
             <Divider />
             <List>
-                {['Graphs'].map((text, index) => (
+                {['Graphs for Talukwise Crops'].map((text, index) => (
                     <ListItem button key={text}>
                         <ListItemIcon onClick={this.handleGraphs(text)}>{<ShowChartRoundedIcon />}</ListItemIcon>
                         <ListItemText primary={text} onClick={this.handleGraphs(text)} />
@@ -89,7 +92,7 @@ export default class SideDrawer extends Component {
             </List>
             <Divider />
             <List>
-                {['Maps'].map((text, index) => (
+                {['Maps for Waterbodies'].map((text, index) => (
                     <ListItem button key={text}>
                         <ListItemIcon onClick={this.handleMaps(text)}>{<ExploreRoundedIcon />}</ListItemIcon>
                         <ListItemText primary={text} onClick={this.handleMaps(text)} />
@@ -147,6 +150,15 @@ export default class SideDrawer extends Component {
                     <ListItem button key={text}>
                         <ListItemIcon onClick={this.handleReports(text)}>{<DescriptionRoundedIcon />}</ListItemIcon>
                         <ListItemText primary={text} onClick={this.handleReports(text)} />
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {['View LandUsage Types'].map((text, index) => (
+                    <ListItem button key={text}>
+                        <ListItemIcon onClick={this.handleLand(text)}>{<ShowChartRoundedIcon />}</ListItemIcon>
+                        <ListItemText primary={text} onClick={this.handleLand(text)} />
                     </ListItem>
                 ))}
             </List>

@@ -72,7 +72,7 @@ export default class MapTalukWise extends Component {
     render() {
         return (
             <div>
-                <Map center={[this.state.centerlat, this.state.centerlong]} zoom={10} >
+                <Map center={[this.state.centerlat, this.state.centerlong]} zoom={13} >
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

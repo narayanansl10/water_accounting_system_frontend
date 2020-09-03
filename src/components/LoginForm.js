@@ -35,7 +35,7 @@ export default class LoginForm extends Component {
     }
     callLoginApi(event) {
         // console.log(this.state.username + " " + this.state.password)
-        const url = "http://localhost:4000/auth/authenticate"
+        const url = _url + "/auth/authenticate"
         const loginDetails = {
             phone_number: this.state.username,
             password: this.state.password

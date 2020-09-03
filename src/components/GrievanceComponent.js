@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SideDrawer from './DrawerComponent'
+import HeaderBarComponent from './HeaderBarComponent'
 import _url from './../URL'
 import { Button } from '@material-ui/core';
 import './styles/mainpagecomponent.css'
@@ -30,9 +31,9 @@ export default class GrievanceComponent extends Component {
     render() {
         return (
             <div>
-
-                <SideDrawer history={this.props.history}>
-                </SideDrawer>
+                <HeaderBarComponent history={this.props.history}></HeaderBarComponent>
+                {/* <SideDrawer history={this.props.history}>
+                </SideDrawer> */}
                 <div>
                     <h1 id="headertextforcomponent">List of grievances to be addressed</h1>
                 </div>

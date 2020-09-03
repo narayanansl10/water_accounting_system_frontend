@@ -9,6 +9,7 @@ import './styles/talukcomponents.css'
 import _url from './../URL'
 import { Button } from '@material-ui/core';
 import SideDrawer from './DrawerComponent'
+import HeaderBarComponent from './HeaderBarComponent'
 const axios = require('axios')
 const jwt = require('jwt-decode')
 
@@ -103,8 +104,9 @@ export default class MapReport extends Component {
     render() {
         return (
             <div>
-                <SideDrawer history={this.props.history}>
-                </SideDrawer>
+                {/* <SideDrawer history={this.props.history}>
+                </SideDrawer> */}
+                <HeaderBarComponent history={this.props.history}></HeaderBarComponent>
                 <div>
                     <h1 id="headertextforcomponent">Talukwise and Cropwise Details</h1>
                 </div>

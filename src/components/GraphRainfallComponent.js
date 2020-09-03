@@ -41,8 +41,12 @@ export default class GraphRainfallComponent extends Component {
                 text: "Water Need during no Rainfall Vs Water Need with Rainfall"
             },
             axisX: {
+                title: "Time (in months)",
                 interval: 1,
-                maximum: 11
+                maximum: 12
+            },
+            axisY: {
+                title: "Water need (in cu.m)"
             },
             data: this.state.dataArray
         }

@@ -3,6 +3,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import HeaderBarComponent from './HeaderBarComponent'
 import './styles/registercropcomponent.css'
 import './styles/talukcomponents.css'
 import _url from '../URL'
@@ -83,18 +84,18 @@ export default class GraphForTaluk extends Component {
         const URL = _url + "/plantations/generateExcel/" + this.state.talukName
         const URLf = _url + "/taluks/talukForId/" + this.state.talukName
         axios.get(URLf).then(response => {
-            console.log(response.data[0].taluk_name)
-            this.setState({ taluk_name: response.data[0].taluk_name })
+            console.log(response.data.taluk_name)
+            this.setState({ taluk_name: response.data.taluk_name })
         }).then(ress => {
             axios.get(URL).then(res => {
                 this.setState({ exceldata: res.data })
                 console.log(res.data)
             }).then(r => {
                 var csvRow = [];
-                var A = [['', 'Serial Number', 'Survey Number', 'Village Name', 'Area of Plantation', 'Crop Name', 'Plantation Data', 'Water Need in m^3', 'Water Need in m^3 in Account of Rainfall of this district', 'Discharge Need in m^3 / sec', 'Discharge Need in m^3 /sec in Account of Rainfall of this district']]
+                var A = [['', 'Serial Number', 'Survey Number', 'Village Name', 'Area of Plantation', 'Crop Name', 'Plantation Date', 'Harvest Date', 'Water Need in m^3', 'Water Need in m^3 in Account of Rainfall of this district', 'Discharge Need in m^3 / sec', 'Discharge Need in m^3 /sec in Account of Rainfall of this district']]
                 var re = this.state.exceldata
                 for (var i = 0; i < re.length; i++) {
-                    A.push([re[i].serial_no, re[i].survey_number, re[i].village_name, re[i].area_of_plantation, re[i].crop_name, re[i].plantation_date, re[i].water_need, re[i].water_need_rainfall, re[i].discharge_water_need, re[i].discharge_water_need_rainfall])
+                    A.push([re[i].serial_no, re[i].survey_number, re[i].village_name, re[i].area_of_plantation, re[i].crop_name, re[i].plantation_date, re[i].harvest_date, re[i].water_need, re[i].water_need_rainfall, re[i].discharge_water_need, re[i].discharge_water_need_rainfall])
                 }
                 for (var j = 0; j < A.length; ++j) {
                     csvRow.push(A[j].join(","))
@@ -120,7 +121,7 @@ export default class GraphForTaluk extends Component {
         const URLf = _url + "/taluks/talukForId/" + this.state.talukName
         const URLc = _url + "/cropinfo"
         axios.get(URLf).then(response => {
-            this.setState({ taluk_name: response.data[0].taluk_name })
+            this.setState({ taluk_name: response.data.taluk_name })
         }).then(ress => {
             axios.post(URL, { taluk_id: this.state.talukName }).then(res => {
                 this.setState({ exceldata: res.data })
@@ -166,8 +167,9 @@ export default class GraphForTaluk extends Component {
     render() {
         return (
             <div>
-                <SideDrawer history={this.props.history}>
-                </SideDrawer>
+                {/* <SideDrawer history={this.props.history}>
+                </SideDrawer> */}
+                <HeaderBarComponent history={this.props.history}></HeaderBarComponent>
                 <div>
                     <h1 id="headertextforcomponent">Generate Report for Talukwise Crops</h1>
                 </div>

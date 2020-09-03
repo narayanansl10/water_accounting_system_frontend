@@ -6,6 +6,7 @@ import GrievanceComponent from './components/GrievanceComponent'
 import RegisterCropComponent from './components/RegisterCropComponent'
 import RegisterUserComponent from './components/RegisterUserComponent'
 import GraphForTaluk from './components/GraphForTaluk'
+import GraphForTalukWater from './components/GraphForTalukWater'
 import WaterBodyForTaluk from './components/WaterBodyForTaluk'
 import WaterBodyForTalukUpdate from './components/WaterBodyForTalukUpdate'
 import ExcelForTaluk from './components/ExcelForTaluk'
@@ -30,6 +31,7 @@ class App extends React.Component {
           <Route exact path='/mapreport' component={MapReport} />
           <Route exact path='/waterbodyfortalukupdate' component={WaterBodyForTalukUpdate} />
           <Route exact path='/grievance' component={GrievanceComponent} />
+          <Route exact path='/land' component={GraphForTalukWater} />
         </BrowserRouter>
       </div>
     )

@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { Button, Container, TextField } from '@material-ui/core'
 import SideDrawer from './DrawerComponent'
+import MapForTalukWaterNeed from '../components/MapForTalukWaterNeed'
+import HeaderBarComponent from './HeaderBarComponent'
 import './styles/adminhome.css'
 import GraphForTaluk from './GraphForTaluk'
 import MapForTaluk from './MapForTaluk'
 import GraphRainfallComponent from './GraphRainfallComponent'
+import GraphForTalukWater from './GraphForTalukWater'
 import GraphForDistrict from './GraphForDistrict'
 import WaterBodyForTaluk from './WaterBodyForTaluk'
 import ExcelForTaluk from './ExcelForTaluk'
@@ -37,8 +40,9 @@ export default class HomePageComponent extends Component {
     render() {
         return (
             <div className="adminhome">
-                <SideDrawer history={this.props.history}>
-                </SideDrawer>
+                <HeaderBarComponent history={this.props.history}></HeaderBarComponent>
+                {/* <SideDrawer history={this.props.history}>
+                </SideDrawer> */}
                 <h1 id="welcometext">Welcome Administrator</h1>
                 <div>
                     <h2 id="welcometext">Use Menu For Navigation</h2>
@@ -51,10 +55,9 @@ export default class HomePageComponent extends Component {
                                 Add</Button>
                         </div> : ''
                         }
-
                     </Container>
-
                 </div>
+                <MapForTalukWaterNeed />
             </div>
         )
     }
